@@ -1,3 +1,15 @@
+<?php
+include 'models/Model.php';
+include 'models/Contacto.php';
+include 'controllers/DataBaseController.php';
+include 'controllers/ContactoController.php';
+
+use App\controllers\ContactoController;
+
+$controller = new ContactoController();
+$contactos = $controller->read();
+
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -19,4 +31,6 @@
         </div>
     </form>
 </body>
+
 </html>
+

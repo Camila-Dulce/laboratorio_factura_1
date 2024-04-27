@@ -1,0 +1,31 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+
+.imagen{
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    margin-left: 630px;
+    margin-bottom: 12px;
+    margin-top: 25px;
+
+
+}
+
+.contenidoInput{
+    width: 250px;
+    height: 20px;
+    text-align: center;
+    margin-left: 550px;
+    margin-bottom: 12px;
+    margin-top: 8px;
+}
+
+.nombreInput{
+    width: 250px;
+    height: 20px;
+    text-align: left;
+    margin-left: 540px;
+}
