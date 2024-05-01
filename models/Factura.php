@@ -3,7 +3,7 @@ namespace App\models;
 
 class Factura extends Model
 {
-    protected $referencia = ""; // Aquí estaban definidos como " "
+    protected $referencia = " "; 
     protected $fecha = "";
     protected $idCliente = 0;
     protected $estado = "";

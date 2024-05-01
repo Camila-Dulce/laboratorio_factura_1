@@ -14,7 +14,7 @@ $articulos = $articuloController->read();
 </head>
 <body>
     <h1>Crear Factura</h1>
-    <form action="factura_controller.php" method="post">
+    <form action="FacturaController.php" method="post">
         <!-- Datos de la factura -->
         <label for="referencia">Referencia:</label>
         <input type="text" name="referencia" id="referencia" required>
