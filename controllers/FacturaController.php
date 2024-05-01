@@ -3,52 +3,67 @@
 namespace App\controllers;
 
 use App\models\Factura;
+use App\models\Cliente;
+use App\models\DetalleFactura;
 
 class FacturaController
 {
-    function read()
+    function generarFactura($factura)
     {
-        $dataBase = new DataBaseController();
-        $sql = "select * from contactos";
-        $result = $dataBase->execSql($sql);
-        $facturas = [];
-        if ($result->num_rows == 0) {
-            return $facturas;
+        // Calcular el descuento
+        $totalCompra = 0;
+        foreach ($factura->detalleFactura() as $detalle) {
+            $totalCompra += $detalle->cantidad * $detalle->precioUnitario;
         }
-        while ($item = $result->fetch_assoc()) {
-            $factura = new Factura();
-    protected $referencia = " " ;
-            $factura->set('referencia', $item['referencia']);
-            $factura->set('fecha', $item['fecha']);
-            $factura->set('idCliente', $item['idCliente']);
-            $factura->set('estado', $item['estado']);
-            $factura->set('descuento', $item['descuento']);
-            array_push($facturas, $factura);
+        $descuento = 0;
+        if ($totalCompra > 650000) {
+            $descuento = 8;
+        } elseif ($totalCompra > 200000) {
+            $descuento = 4;
+        } elseif ($totalCompra > 100000) {
+            $descuento = 2;
         }
-        $dataBase->close();
-        return $facturas;
+
+        // Crear la factura
+        $factura->descuento = $descuento;
+        $factura->estado = 'Pagada'; // Estado por defecto
+        $result = $this->guardarFactura($factura);
+
+        if ($result) {
+            // Actualizar el estado de los artículos y guardar los detalles de la factura
+            foreach ($factura->detalleFactura() as $detalle) {
+                $detalle->precioUnitario = $detalle->articulo->precio;
+                $this->guardarDetalleFactura($detalle);
+            }
+        }
+        return $result;
     }
 
-    function create($factura)
+    function guardarFactura($factura)
     {
-        $sql = "insert into factura(refencia,fecha,estado,descuento)values";
-        $sql .= "(";
-        $sql .= "'".$factura->get('referencia')."',";
-        $sql .= "'".$factura->get('fecha')."',";
-        $sql .= "'".$factura->get('estado')."',";
-        $sql .= "'".$factura->get('descuento')."'";
-        $sql .= ")";
         $dataBase = new DataBaseController();
+        $sql = "INSERT INTO facturas (referencia, fecha, idCliente, estado, descuento) VALUES ";
+        $sql .= "('".$factura->referencia."', ";
+        $sql .= "NOW(), ";
+        $sql .= "'".$factura->cliente->idCliente."', ";
+        $sql .= "'".$factura->estado."', ";
+        $sql .= "'".$factura->descuento."')";
         $result = $dataBase->execSql($sql);
         $dataBase->close();
         return $result;
     }
 
-    function update()
+    function guardarDetalleFactura($detalle)
     {
-    }
-
-    function delete()
-    {
+        $dataBase = new DataBaseController();
+        $sql = "INSERT INTO detalles_factura (cantidad, precioUnitario, idArticulo, referenciaFactura) VALUES ";
+        $sql .= "('".$detalle->cantidad."', ";
+        $sql .= "'".$detalle->precioUnitario."', ";
+        $sql .= "'".$detalle->idArticulo."', ";
+        $sql .= "'".$detalle->referenciaFactura."')";
+        $result = $dataBase->execSql($sql);
+        $dataBase->close();
+        return $result;
     }
 }
+?>
