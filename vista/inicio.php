@@ -13,27 +13,7 @@ $articulos = $articuloController->read();
     <title>Facturación</title>
 </head>
 <body>
-    <h1>Crear Factura</h1>
-    <form action="FacturaController.php" method="post">
-        <!-- Datos de la factura -->
-        <label for="referencia">Referencia:</label>
-        <input type="text" name="referencia" id="referencia" required>
-        <br>
-        <label for="fecha">Fecha:</label>
-        <input type="date" name="fecha" id="fecha" value="<?php echo date('Y-m-d'); ?>" required>
-        <br>
-        <label for="estado">Estado:</label>
-        <select name="estado" id="estado" required>
-            <option value="Pagada">Pagada</option>
-            <option value="Error">Error</option>
-            <option value="Cambio">Cambio</option>
-            <option value="Devolución">Devolución</option>
-        </select>
-        <br>
-        <input type="submit" value="Generar Factura">
-    </form>
-
-    <form action="ClienteController.php" method="post">     
+    <form action="../vista/registroCliente.php" method="post">     
         <!-- Datos del cliente -->
         <h2>Datos del Cliente</h2>
         <label for="nombreCompleto">Nombre Completo:</label>
@@ -55,6 +35,31 @@ $articulos = $articuloController->read();
         <br>
         <label for="telefono">Teléfono:</label>
         <input type="tel" name="telefono" id="telefono" required>
+        <br>
+        <input type="submit" value="Generar Factura">
+    </form>
+    <h1>Crear Factura</h1>
+    <form action="../vista/registroFactura.php" method="post">
+        <!-- Datos de la factura -->
+        <label for="refencia">Referencia:</label>
+        <input type="text" name="refencia" id="refencia" required>
+        <br>
+        <label for="fecha">Fecha:</label>
+        <input type="date" name="fecha" id="fecha" value="<?php echo date('Y-m-d'); ?>" required>
+        <br>
+        <label for="idCliente">cliente:</label>
+        <input type="text" name="idCliente" id="idCliente"   required>
+        <br>
+        <label for="estado">Estado:</label>
+        <select name="estado" id="estado" required>
+            <option value="Pagada">Pagada</option>
+            <option value="Error">Error</option>
+            <option value="Cambio">Cambio</option>
+            <option value="Devolución">Devolución</option>
+        </select>
+        <br>
+        <label for="descuento">descuento:</label>
+        <input type="text" name="descuento" id="descuento"   required>
         <br>
         <input type="submit" value="Generar Factura">
     </form>

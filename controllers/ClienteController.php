@@ -17,7 +17,7 @@ class ClienteController
         }
         while ($item = $result->fetch_assoc()) {
             $cliente = new Cliente();
-    protected $referencia = " " ;
+            $referencia = " " ;
             $cliente->set('idCliente', $item['idCliente']);
             $cliente->set('nombreCompleto', $item['nombreCompleto']);
             $cliente->set('tipoDocumento', $item['tipoDocumento']);
@@ -32,7 +32,7 @@ class ClienteController
 
     function create($cliente)
     {
-        $sql = "insert into detallefactura(nombreCompleto,tipoDocumento,numeroDocumento,email,telefono)values";
+        $sql = "insert into Clientes(nombreCompleto,tipoDocumento,numeroDocumento,email,telefono)values";
         $sql .= "(";
         $sql .= "'".$cliente->get('nombreCompleto')."',";
         $sql .= "'".$cliente->get('tipoDocumento')."',";

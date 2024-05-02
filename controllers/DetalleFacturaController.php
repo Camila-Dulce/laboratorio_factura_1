@@ -18,7 +18,7 @@ class DetalleFacturaController
         }
         while ($item = $result->fetch_assoc()) {
             $Detallefactura = new DetalleFactura();
-            protected $referencia = " " ;
+            $referencia = " " ;
             $Detallefactura->set('id', $item['id']);
             $Detallefactura->set('cantidad', $item['cantidad']);
             $Detallefactura->set('precioUnitario', $item['precioUnitario']);

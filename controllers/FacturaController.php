@@ -50,8 +50,8 @@ class FacturaController
         }
         while ($item = $result->fetch_assoc()) {
             $factura = new Factura();
-            protected $referencia = " " ;
-            $factura->set('refencia', $item['referencia']);
+            $referencia = " " ;
+            $factura->set('refencia', $item['refencia']);
             $factura->set('fecha', $item['fecha']);
             $factura->set('idCliente', $item['idCliente']);
             $factura->set('estado', $item['estado']);
@@ -64,11 +64,12 @@ class FacturaController
 
     function guardarFactura($factura)
     {
-        $sql = "insert into factura(refencia,fecha,estado)values";
-        $sql .= "(";
-        $sql .= "'".$factura->get('refencia')."',";
+        $sql = "INSERT INTO facturas (refencia, fecha, idCliente, estado, descuento) VALUES (";
+        $sql .= "'".$factura->get('referencia')."',";
         $sql .= "'".$factura->get('fecha')."',";
+        $sql .= "'".$factura->get('idCliente')."',";
         $sql .= "'".$factura->get('estado')."',";
+        $sql .= "'".$factura->get('descuento')."'"; 
         $sql .= ")";
         $dataBase = new DataBaseController();
         $result = $dataBase->execSql($sql);

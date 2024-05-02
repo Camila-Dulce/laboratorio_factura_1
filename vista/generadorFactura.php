@@ -35,7 +35,14 @@
     <select id="productos" name="productos[]" multiple required>
         <option value="Producto1">Producto 1</option>
         <option value="Producto2">Producto 2</option>
-        <option value="Producto3">Producto 3</option>
+        <option value="Producto3">Producto 3</option><label for="tipoDocumento">Tipo de documento:</label><br>
+    <select id="tipoDocumento" name="tipoDocumento" required>
+        <option value="cc">Cédula de ciudadania</option>
+        <option value="Carnet de extranjería">Carnet de extranjería</option>
+        <option value="NIT">NIT</option>
+        <option value="TI">Tarjeta de identidad</option>
+        <option value="otro">Otro</option>
+    </select><br><br>
     </select><br><br>
     
     <label for="cantidad">Cantidad:</label><br>
