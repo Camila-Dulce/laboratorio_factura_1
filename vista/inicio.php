@@ -30,7 +30,10 @@ $articulos = $articuloController->read();
             <option value="Devolución">Devolución</option>
         </select>
         <br>
+        <input type="submit" value="Generar Factura">
+    </form>
 
+    <form action="ClienteController.php" method="post">     
         <!-- Datos del cliente -->
         <h2>Datos del Cliente</h2>
         <label for="nombreCompleto">Nombre Completo:</label>
@@ -48,7 +51,10 @@ $articulos = $articuloController->read();
         <label for="telefono">Teléfono:</label>
         <input type="tel" name="telefono" id="telefono" required>
         <br>
+        <input type="submit" value="Generar Factura">
+    </form>
 
+    <form action="ArticuloController.php" method="post">     
         <!-- Detalles de la factura -->
         <h2>Detalles de la Factura</h2>
         <label for="articulo">Artículo:</label>

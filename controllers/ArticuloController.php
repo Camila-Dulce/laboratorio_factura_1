@@ -13,25 +13,22 @@ class ArticuloController
     function read()
     {
         $dataBase = new DataBaseController();
-        $sql = "SELECT * FROM articulos";
+        $sql = "select * from contactos";
         $result = $dataBase->execSql($sql);
-        $articulos = [];
-
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $articulo = new Articulo();
-                if (isset($row['idArticulo'])) {
-                    $articulo->set('idArticulo', $row['idArticulo']);
-                }
-                if (isset($row['nombreArticulo'])) {
-                    $articulo->set('nombreArticulo', $row['nombreArticulo']);
-                }
-                array_push($articulos, $articulo);
-            }
+        $Articulos = [];
+        if ($result->num_rows == 0) {
+            return $Articulos;
         }
-
+        while ($item = $result->fetch_assoc()) {
+            $Articulo = new Articulo();
+            protected $referencia = " " ;
+            $Articulo->set('idArticulo', $item['idArticulo']);
+            $Articulo->set('nombreArticulo', $item['nombreArticulo']);
+            $Articulo->set('precio', $item['precio']);
+            array_push($Articulos, $Articulo);
+        }
         $dataBase->close();
-        return $articulos;
+        return $Articulos;
     }
 }
 ?>

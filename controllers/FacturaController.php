@@ -8,7 +8,7 @@ use App\models\DetalleFactura;
 
 class FacturaController
 {
-    function generarFactura($factura)
+    function CalculoFactura($factura)
     {
         // Calcular el descuento
         $totalCompra = 0;
@@ -39,28 +39,38 @@ class FacturaController
         return $result;
     }
 
-    function guardarFactura($factura)
+    function mostarFactura()
     {
         $dataBase = new DataBaseController();
-        $sql = "INSERT INTO facturas (referencia, fecha, idCliente, estado, descuento) VALUES ";
-        $sql .= "('".$factura->referencia."', ";
-        $sql .= "NOW(), ";
-        $sql .= "'".$factura->cliente->idCliente."', ";
-        $sql .= "'".$factura->estado."', ";
-        $sql .= "'".$factura->descuento."')";
+        $sql = "select * from contactos";
         $result = $dataBase->execSql($sql);
+        $facturas = [];
+        if ($result->num_rows == 0) {
+            return $facturas;
+        }
+        while ($item = $result->fetch_assoc()) {
+            $factura = new Factura();
+            protected $referencia = " " ;
+            $factura->set('referencia', $item['referencia']);
+            $factura->set('fecha', $item['fecha']);
+            $factura->set('idCliente', $item['idCliente']);
+            $factura->set('estado', $item['estado']);
+            $factura->set('descuento', $item['descuento']);
+            array_push($facturas, $factura);
+        }
         $dataBase->close();
-        return $result;
+        return $facturas;
     }
 
-    function guardarDetalleFactura($detalle)
+    function guardarFactura($factura)
     {
+        $sql = "insert into factura(refencia,fecha,estado)values";
+        $sql .= "(";
+        $sql .= "'".$factura->get('referencia')."',";
+        $sql .= "'".$factura->get('fecha')."',";
+        $sql .= "'".$factura->get('estado')."',";
+        $sql .= ")";
         $dataBase = new DataBaseController();
-        $sql = "INSERT INTO detalles_factura (cantidad, precioUnitario, idArticulo, referenciaFactura) VALUES ";
-        $sql .= "('".$detalle->cantidad."', ";
-        $sql .= "'".$detalle->precioUnitario."', ";
-        $sql .= "'".$detalle->idArticulo."', ";
-        $sql .= "'".$detalle->referenciaFactura."')";
         $result = $dataBase->execSql($sql);
         $dataBase->close();
         return $result;

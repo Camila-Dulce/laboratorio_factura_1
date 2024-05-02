@@ -7,17 +7,36 @@ use App\models\Articulo;
 
 class DetalleFacturaController
 {
-    function crearDetalleFactura($detalle)
+    function read()
     {
-        $articulo = $detalle->articulo;
-        $detalle->precioUnitario = $articulo->precio;
-
         $dataBase = new DataBaseController();
-        $sql = "INSERT INTO detalles_factura (cantidad, precioUnitario, idArticulo, referenciaFactura) VALUES ";
-        $sql .= "('".$detalle->cantidad."', ";
-        $sql .= "'".$detalle->precioUnitario."', ";
-        $sql .= "'".$detalle->idArticulo."', ";
-        $sql .= "'".$detalle->referenciaFactura."')";
+        $sql = "select * from contactos";
+        $result = $dataBase->execSql($sql);
+        $Detallefacturas = [];
+        if ($result->num_rows == 0) {
+            return $Detallefacturas;
+        }
+        while ($item = $result->fetch_assoc()) {
+            $Detallefactura = new DetalleFactura();
+            protected $referencia = " " ;
+            $Detallefactura->set('idDetalleFactura', $item['idDetalleFactura']);
+            $Detallefactura->set('cantidad', $item['cantidad']);
+            $Detallefactura->set('precioUnitario', $item['precioUnitario']);
+            $Detallefactura->set('idArticulo', $item['idArticulo']);
+            $Detallefactura->set('referenciaFactuara', $item['referenciaFactuara']);
+            array_push($Detallefacturas, $Detallefactura);
+        }
+        $dataBase->close();
+        return $Detallefacturas;
+    }
+
+    function crearDetalleFactura($Detallefactura)
+    {
+        $sql = "insert into detallefactura(cantidad)values";
+        $sql .= "(";
+        $sql .= "'".$Detallefactura->get('cantidad')."',";
+        $sql .= ")";
+        $dataBase = new DataBaseController();
         $result = $dataBase->execSql($sql);
         $dataBase->close();
         return $result;
