@@ -8,7 +8,7 @@ class controladorUser
     private $host = 'localhost';
     private $user = 'root';
     private $pwd = '';
-    private $db = 'factura';
+    private $db = 'facturacion_tienda_db';
     private $conex;
 
     function __construct()
@@ -45,7 +45,7 @@ class controladorUser
     }
 }
 
-// Ahora, fuera de la clase controladorUser, puedes redirigir según el resultado de la validación
+// fuera de la clase controladorUser, redirigimos según el resultado de la validación
 
 $controlador = new controladorUser();
 
@@ -55,7 +55,7 @@ if (isset($_POST['usuario']) && isset($_POST['password'])) {
 
     if ($controlador->validarUsuario($usuario, $password)) {
         // Usuario válido, redirigir a generadorFactura.php
-        header("Location: generadorFactura.php");
+        header("Location: inicio.php");
         exit;
     } else {
         // Usuario inválido, redirigir a una página de error

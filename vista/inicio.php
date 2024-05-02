@@ -1,6 +1,9 @@
 <?php
 require_once '../controllers/ArticuloController.php';
 
+use App\controllers\ClienteController;
+use App\models\Cliente;
+
 $articuloController = new App\controllers\ArticuloController();
 $articulos = $articuloController->read();
 ?>
@@ -13,7 +16,7 @@ $articulos = $articuloController->read();
     <title>Facturación</title>
 </head>
 <body>
-    <form action="../vista/registroCliente.php" method="post">     
+    <form action="validacionCliente.php" method="post">     
         <!-- Datos del cliente -->
         <h2>Datos del Cliente</h2>
         <label for="nombreCompleto">Nombre Completo:</label>
