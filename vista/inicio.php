@@ -54,23 +54,25 @@ $articulos = $articuloController->read();
         <input type="submit" value="Generar Factura">
     </form>
 
-    <form action="ArticuloController.php" method="post">     
+    <h1>Lista de Artículos</h1>
+    <ul>
+        <?php foreach ($articulos as $articulo): ?>
+            <li>
+                <strong>Nombre:</strong> <?php echo $articulo->get('nombre'); ?>, 
+                <strong>Precio:</strong> <?php echo $articulo->get('precio'); ?>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+
+    <form action="DetalleFacturaController.php" method="post">     
         <!-- Detalles de la factura -->
         <h2>Detalles de la Factura</h2>
-        <label for="articulo">Artículo:</label>
-        <ul>
-            <?php foreach ($articulos as $articulo): ?>
-                <li>
-                    <input type="radio" name="articulo" id="<?php echo $articulo->get('idArticulo'); ?>" value="<?php echo $articulo->get('idArticulo'); ?>">
-                    <label for="<?php echo $articulo->get('idArticulo'); ?>"><?php echo $articulo->get('nombreArticulo') . " - $" . $articulo->get('precio'); ?></label>
-                </li>
-            <?php endforeach; ?>
-        </ul>
-        <br>
         <label for="cantidad">Cantidad:</label>
         <input type="number" name="cantidad" id="cantidad" required>
         <br>
         <input type="submit" value="Generar Factura">
     </form>
+
 </body>
 </html>
+

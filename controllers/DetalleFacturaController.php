@@ -19,11 +19,11 @@ class DetalleFacturaController
         while ($item = $result->fetch_assoc()) {
             $Detallefactura = new DetalleFactura();
             protected $referencia = " " ;
-            $Detallefactura->set('idDetalleFactura', $item['idDetalleFactura']);
+            $Detallefactura->set('id', $item['id']);
             $Detallefactura->set('cantidad', $item['cantidad']);
             $Detallefactura->set('precioUnitario', $item['precioUnitario']);
             $Detallefactura->set('idArticulo', $item['idArticulo']);
-            $Detallefactura->set('referenciaFactuara', $item['referenciaFactuara']);
+            $Detallefactura->set('refenciaFactuara', $item['refenciaFactuara']);
             array_push($Detallefacturas, $Detallefactura);
         }
         $dataBase->close();

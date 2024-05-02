@@ -2,7 +2,7 @@
 
 namespace App\controllers;
 
-require_once '../models/Articulo.php'; // Corregir ruta de acceso
+require_once '../models/Articulo.php'; 
 require_once 'DataBaseController.php';
 
 use App\models\Articulo;
@@ -13,7 +13,7 @@ class ArticuloController
     function read()
     {
         $dataBase = new DataBaseController();
-        $sql = "select * from contactos";
+        $sql = "SELECT * FROM articulos";
         $result = $dataBase->execSql($sql);
         $Articulos = [];
         if ($result->num_rows == 0) {
@@ -21,9 +21,7 @@ class ArticuloController
         }
         while ($item = $result->fetch_assoc()) {
             $Articulo = new Articulo();
-            protected $referencia = " " ;
-            $Articulo->set('idArticulo', $item['idArticulo']);
-            $Articulo->set('nombreArticulo', $item['nombreArticulo']);
+            $Articulo->set('nombre', $item['nombre']);
             $Articulo->set('precio', $item['precio']);
             array_push($Articulos, $Articulo);
         }
@@ -32,3 +30,4 @@ class ArticuloController
     }
 }
 ?>
+

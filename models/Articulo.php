@@ -5,8 +5,8 @@ require_once 'Model.php';
 
 class Articulo extends Model
 {
-    protected $idArticulo = 0;
-    protected $nombreArticulo = " ";
+    protected $id= 0;
+    protected $nombre = " ";
     protected $precio = 0;
 
     public function detallesFactura()

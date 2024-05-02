@@ -3,7 +3,7 @@ namespace App\models;
 
 class Factura extends Model
 {
-    protected $referencia = " "; 
+    protected $refencia = " "; 
     protected $fecha = "";
     protected $idCliente = 0;
     protected $estado = "";
@@ -16,7 +16,7 @@ class Factura extends Model
 
     public function detalleFactura()
     {
-        return $this->hasMany(DetalleFactura::class, 'referenciaFactura');
+        return $this->hasMany(DetalleFactura::class, 'refenciaFactura');
     }
 }
 ?>
