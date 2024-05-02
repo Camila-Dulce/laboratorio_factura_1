@@ -2,17 +2,6 @@
 require_once '../controllers/controladorUser.php';
 require_once 'index.php'; 
 
-$usuario = $_POST['usuario'];
-$password = $_POST['password'];
+    echo "<div class='mensaje-invalido'>Lo sentimos, ocurrió un error durante el inicio de sesión. Por favor, verifique sus credenciales e inténtelo de nuevo.</div>";
 
-$controladorUser = new \App\controllers\controladorUser();
-if ($controladorUser->validarUsuario($usuario, $password)) {
-    echo "<div class='mensaje-valido'>Usuario validado correctamente</div>";
-} else {
-    echo "<div class='mensaje-invalido'>Usuario o contraseña incorrectos</div>";
-}
-
-
-$controladorUser->close();
 ?>
-

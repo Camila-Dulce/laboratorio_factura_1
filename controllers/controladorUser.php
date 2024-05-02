@@ -29,9 +29,11 @@ class controladorUser
         $result = $stmt->get_result();
         
         if ($result->num_rows > 0) {
-            return true; // Usuario válido
+            // Usuario válido
+            return true;
         } else {
-            return false; // Usuario inválido
+            // Usuario inválido
+            return false;
         }
 
         $stmt->close();
@@ -42,4 +44,28 @@ class controladorUser
         $this->conex->close();
     }
 }
+
+// Ahora, fuera de la clase controladorUser, puedes redirigir según el resultado de la validación
+
+$controlador = new controladorUser();
+
+if (isset($_POST['usuario']) && isset($_POST['password'])) {
+    $usuario = $_POST['usuario']; 
+    $password = $_POST['password']; 
+
+    if ($controlador->validarUsuario($usuario, $password)) {
+        // Usuario válido, redirigir a generadorFactura.php
+        header("Location: generadorFactura.php");
+        exit;
+    } else {
+        // Usuario inválido, redirigir a una página de error
+        header("Location: validacionUser.php");
+        exit;
+    }
+}
 ?>
+
+
+
+
+
