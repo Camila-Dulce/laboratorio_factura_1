@@ -41,6 +41,10 @@ $articulos = $articuloController->read();
         <br>
         <input type="submit" value="Generar Factura">
     </form>
+    <form action="listaClientes.php" method="GET">
+    <input type="submit" value="Actualizar Datos">
+</form>
+
     <h1>Crear Factura</h1>
     <form action="../vista/registroFactura.php" method="post">
         <!-- Datos de la factura -->
