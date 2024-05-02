@@ -39,8 +39,13 @@ $articulos = $articuloController->read();
         <label for="nombreCompleto">Nombre Completo:</label>
         <input type="text" name="nombreCompleto" id="nombreCompleto" required>
         <br>
-        <label for="tipoDocumento">Tipo Documento:</label>
-        <input type="text" name="tipoDocumento" id="tipoDocumento" required>
+        <label for="tipoDocumento">Tipo de documento:</label><br>
+        <select id="tipoDocumento" name="tipoDocumento" required>
+        <option value="cc">Cédula de ciudadania</option>
+        <option value="Carnet de extranjería">Carnet de extranjería</option>
+        <option value="NIT">NIT</option>
+        <option value="TI">Tarjeta de identidad</option>
+        </select><br><br>
         <br>
         <label for="numeroDocumento">Número Documento:</label>
         <input type="text" name="numeroDocumento" id="numeroDocumento" required>
