@@ -65,7 +65,7 @@ class FacturaController
     function guardarFactura($factura)
     {
         $sql = "INSERT INTO facturas (refencia, fecha, idCliente, estado, descuento) VALUES (";
-        $sql .= "'".$factura->get('referencia')."',";
+        $sql .= "'".$factura->get('refencia')."',";
         $sql .= "'".$factura->get('fecha')."',";
         $sql .= "'".$factura->get('idCliente')."',";
         $sql .= "'".$factura->get('estado')."',";
