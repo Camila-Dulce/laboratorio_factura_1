@@ -3,8 +3,7 @@
 namespace App\controllers;
 
 use App\models\Factura;
-use App\models\Cliente;
-use App\models\DetalleFactura;
+use App\controllers\DataBaseController;
 
 class FacturaController
 {
@@ -42,7 +41,7 @@ class FacturaController
     function mostarFactura()
     {
         $dataBase = new DataBaseController();
-        $sql = "select * from contactos";
+        $sql = "SELECT * FROM facturas";
         $result = $dataBase->execSql($sql);
         $facturas = [];
         if ($result->num_rows == 0) {
@@ -50,7 +49,6 @@ class FacturaController
         }
         while ($item = $result->fetch_assoc()) {
             $factura = new Factura();
-            $referencia = " " ;
             $factura->set('refencia', $item['refencia']);
             $factura->set('fecha', $item['fecha']);
             $factura->set('idCliente', $item['idCliente']);
@@ -67,7 +65,7 @@ class FacturaController
         $sql = "INSERT INTO facturas (refencia, fecha, idCliente, estado, descuento) VALUES (";
         $sql .= "'".$factura->get('refencia')."',";
         $sql .= "'".$factura->get('fecha')."',";
-        $sql .= "'".$factura->get('idCliente')."',";
+        $sql .= ($factura->get('idCliente') != '') ? "'".$factura->get('idCliente')."'," : "NULL,";
         $sql .= "'".$factura->get('estado')."',";
         $sql .= "'".$factura->get('descuento')."'"; 
         $sql .= ")";
@@ -78,3 +76,4 @@ class FacturaController
     }
 }
 ?>
+
