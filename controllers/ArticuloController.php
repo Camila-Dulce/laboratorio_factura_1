@@ -21,6 +21,7 @@ class ArticuloController
         }
         while ($item = $result->fetch_assoc()) {
             $Articulo = new Articulo();
+            $Articulo->set('id', $item['id']);
             $Articulo->set('nombre', $item['nombre']);
             $Articulo->set('precio', $item['precio']);
             array_push($Articulos, $Articulo);

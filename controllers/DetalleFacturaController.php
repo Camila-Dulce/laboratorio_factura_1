@@ -3,7 +3,7 @@
 namespace App\controllers;
 
 use App\models\DetalleFactura;
-use App\models\Articulo;
+use App\controllers\DataBaseController; // Corregido
 
 class DetalleFacturaController
 {
@@ -19,7 +19,6 @@ class DetalleFacturaController
         while ($item = $result->fetch_assoc()) {
             $Detallefactura = new DetalleFactura();
             $referencia = " " ;
-            $Detallefactura->set('id', $item['id']);
             $Detallefactura->set('cantidad', $item['cantidad']);
             $Detallefactura->set('precioUnitario', $item['precioUnitario']);
             $Detallefactura->set('idArticulo', $item['idArticulo']);
@@ -30,13 +29,15 @@ class DetalleFacturaController
         return $Detallefacturas;
     }
 
-    function crearDetalleFactura($Detallefactura)
+    function crearDetalleFactura($DetalleFactura) // Corregido el nombre del parámetro
     {
-        $sql = "insert into detallefactura(cantidad)values";
-        $sql .= "(";
-        $sql .= "'".$Detallefactura->get('cantidad')."',";
-        $sql .= ")";
         $dataBase = new DataBaseController();
+        $sql = "INSERT INTO detallefacturas (cantidad, precioUnitario, idArticulo, referenciaFactura) VALUES (";
+        $sql .= "'".$DetalleFactura->get('cantidad')."',"; // Corregido
+        $sql .= "'".$DetalleFactura->get('precioUnitario')."',"; // Corregido
+        $sql .= "'".$DetalleFactura->get('idArticulo')."',"; // Corregido
+        $sql .= "'".$DetalleFactura->get('referenciaFactura')."'"; // Corregido
+        $sql .= ")";
         $result = $dataBase->execSql($sql);
         $dataBase->close();
         return $result;

@@ -1,5 +1,3 @@
---pagina no utilizada para validacion--
-
 <?php
 include '../models/Model.php';
 include '../models/cliente.php';

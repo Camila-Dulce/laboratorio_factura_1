@@ -3,15 +3,14 @@ namespace App\models;
 
 class DetalleFactura extends Model
 {
-    protected $id = 0;
     protected $cantidad = 0;
     protected $precioUnitario = 0;
     protected $idArticulo = 0;
-    protected $refenciaFactura = "";
+    protected $referenciaFactura = ""; // Corregido nombre del atributo
 
     public function factura()
     {
-        return $this->belongsTo(Factura::class, 'refenciaFactura');
+        return $this->belongsTo(Factura::class, 'referenciaFactura'); // Corregido nombre del atributo
     }
 
     public function articulo()

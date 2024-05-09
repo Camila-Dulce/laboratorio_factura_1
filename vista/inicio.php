@@ -1,9 +1,6 @@
 <?php
 require_once '../controllers/ArticuloController.php';
 
-use App\controllers\ClienteController;
-use App\models\Cliente;
-
 $articuloController = new App\controllers\ArticuloController();
 $articulos = $articuloController->read();
 ?>
@@ -75,17 +72,21 @@ $articulos = $articuloController->read();
     <ul>
         <?php foreach ($articulos as $articulo): ?>
             <li>
+                <strong>Numero De Serie:</strong> <?php echo $articulo->get('id'); ?>, 
                 <strong>Nombre:</strong> <?php echo $articulo->get('nombre'); ?>, 
                 <strong>Precio:</strong> <?php echo $articulo->get('precio'); ?>
             </li>
         <?php endforeach; ?>
     </ul>
 
-    <form action="DetalleFacturaController.php" method="post">     
+    <form action="../vista/registroDetalleFactura.php" method="post">     
         <!-- Detalles de la factura -->
         <h2>Detalles de la Factura</h2>
         <label for="cantidad">Cantidad:</label>
         <input type="number" name="cantidad" id="cantidad" required>
+        <br>
+        <label for="idArticulo">idArticulo:</label>
+        <input type="number" name="idArticulo" id="idArticulo" required>
         <br>
         <input type="submit" value="Generar Factura">
     </form>
