@@ -36,7 +36,7 @@ $articulos = $articuloController->read();
         <label for="telefono">Teléfono:</label>
         <input type="tel" name="telefono" id="telefono" required>
         <br>
-        <input type="submit" value="Generar Factura">
+        <input type="submit" value="Validar Cliente">
     </form>
     <form action="listaClientes.php" method="GET">
     <input type="submit" value="Actualizar Datos">

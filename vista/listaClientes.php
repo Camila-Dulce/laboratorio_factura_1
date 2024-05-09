@@ -53,11 +53,14 @@
         } else {
             echo "<tr><td colspan='6'>No hay clientes registrados.</td></tr>";
         }
+        
 
         // Cerrar la conexión
         $db->close();
         ?>
     </table>
+    <br>
+    <a href="../vista/inicio.php">Volver</a>
 </body>
 </html>
 

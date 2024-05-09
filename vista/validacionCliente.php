@@ -49,6 +49,8 @@
     // Cerrar la conexión
     $db->close();
     ?>
+    <br>
+    <a href="../vista/inicio.php">Volver</a>
 </body>
 </html>
 
