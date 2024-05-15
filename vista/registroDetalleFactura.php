@@ -30,9 +30,9 @@ $referenciaFactura = 102123; // Asumo que esta es una referencia de ejemplo.
 $DetalleFactura->set('cantidad', $_POST['cantidad']);
 $DetalleFactura->set('precioUnitario', $Preciounitario);
 $DetalleFactura->set('idArticulo', $_POST['idArticulo']);
-$DetalleFactura->set('referenciaFactura', $referenciaFactura);
+$DetalleFactura->set('refenciaFactura', $referenciaFactura);
 
-$result = $controller->crearDetalleFactura($DetalleFactura);
+$result = $controller->crear($DetalleFactura);
 
 ?>
 
@@ -50,6 +50,6 @@ $result = $controller->crearDetalleFactura($DetalleFactura);
     <li><strong>cantidad:</strong> <?php echo $DetalleFactura->get('cantidad'); ?></li>
         <li><strong>Precio:</strong> <?php echo $DetalleFactura->get('precioUnitario'); ?></li>
         <li><strong>ID Aticulo:</strong> <?php echo $DetalleFactura->get('idArticulo'); ?></li>
-        <li><strong>referenciaFactura:</strong> <?php echo $DetalleFactura->get('referenciaFactura'); ?></li>
+        <li><strong>referenciaFactura:</strong> <?php echo $DetalleFactura->get('refenciaFactura'); ?></li>
 </body>
 </html>

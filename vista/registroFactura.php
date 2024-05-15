@@ -1,19 +1,34 @@
 <?php
 include '../models/Model.php';
 include '../models/Factura.php';
+include '../models/Cliente.php';
 include '../controllers/DataBaseController.php';
 include '../controllers/FacturaController.php';
+include '../controllers/ClienteController.php'; 
 
 use App\controllers\FacturaController;
 use App\models\Factura;
+use App\models\Cliente;
+use App\controllers\ClienteController;
+
+$clienteController = new ClienteController();
+$clientes = $clienteController->read();
+$idcliente = null;
+
+if (is_array($clientes) && count($clientes) > 0) {
+    foreach ($clientes as $cliente): 
+        if($cliente->get('numeroDocumento') == $_POST['numeroDocumento'] ){ 
+           $idcliente = $cliente->get('id');
+        }
+    endforeach;
+}
 
 $controller = new FacturaController();
 $factura = new Factura();
-$factura->set('refencia', $_POST['refencia']);
 $factura->set('fecha', $_POST['fecha']);
-$factura->set('idCliente', $_POST['idCliente']);
+$factura->set('idCliente', $idcliente);
 $factura->set('estado', $_POST['estado']);
-$factura->set('descuento', $_POST['descuento']);
+$factura->set('descuento', 0);
 
 $result = $controller->guardarFactura($factura);
 ?>
@@ -39,4 +54,3 @@ $result = $controller->guardarFactura($factura);
     <a href="../vista/inicio.php">Volver</a>
 </body>
 </html>
-

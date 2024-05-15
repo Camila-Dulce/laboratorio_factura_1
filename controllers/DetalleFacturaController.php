@@ -29,15 +29,15 @@ class DetalleFacturaController
         return $Detallefacturas;
     }
 
-    function crearDetalleFactura($DetalleFactura) // Corregido el nombre del parámetro
+    function crear($DetalleFactura) // Corregido el nombre del parámetro
     {
-        $dataBase = new DataBaseController();
-        $sql = "INSERT INTO detallefacturas (cantidad, precioUnitario, idArticulo, referenciaFactura) VALUES (";
+        $sql = "INSERT INTO detallefacturas (cantidad, precioUnitario, idArticulo, refenciaFactura ) VALUES (";
         $sql .= "'".$DetalleFactura->get('cantidad')."',"; // Corregido
         $sql .= "'".$DetalleFactura->get('precioUnitario')."',"; // Corregido
         $sql .= "'".$DetalleFactura->get('idArticulo')."',"; // Corregido
-        $sql .= "'".$DetalleFactura->get('referenciaFactura')."'"; // Corregido
+        $sql .= "'".$DetalleFactura->get('refenciaFactura')."'"; // Corregido
         $sql .= ")";
+        $dataBase = new DataBaseController();
         $result = $dataBase->execSql($sql);
         $dataBase->close();
         return $result;

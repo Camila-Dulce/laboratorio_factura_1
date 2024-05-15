@@ -6,11 +6,11 @@ class DetalleFactura extends Model
     protected $cantidad = 0;
     protected $precioUnitario = 0;
     protected $idArticulo = 0;
-    protected $referenciaFactura = ""; // Corregido nombre del atributo
+    protected $refenciaFactura = ""; // Corregido nombre del atributo
 
     public function factura()
     {
-        return $this->belongsTo(Factura::class, 'referenciaFactura'); // Corregido nombre del atributo
+        return $this->belongsTo(Factura::class, 'refenciaFactura'); // Corregido nombre del atributo
     }
 
     public function articulo()

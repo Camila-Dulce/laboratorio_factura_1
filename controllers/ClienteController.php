@@ -3,28 +3,27 @@
 namespace App\controllers;
 
 use App\models\Cliente;
+use App\controllers\DataBaseController;
 
 class ClienteController
 {
     function read()
     {
         $dataBase = new DataBaseController();
-        $sql = "select * from contactos";
+        $sql = "SELECT * FROM clientes"; // Asegúrate de que el nombre de la tabla sea correcto
         $result = $dataBase->execSql($sql);
         $clientes = [];
-        if ($result->num_rows == 0) {
-            return $Detallefacturas;
-        }
-        while ($item = $result->fetch_assoc()) {
-            $cliente = new Cliente();
-            $referencia = " " ;
-            $cliente->set('idCliente', $item['idCliente']);
-            $cliente->set('nombreCompleto', $item['nombreCompleto']);
-            $cliente->set('tipoDocumento', $item['tipoDocumento']);
-            $cliente->set('numeroDocumento', $item['numeroDocumento']);
-            $cliente->set('email', $item['email']);
-            $cliente->set('telefono', $item['telefono']);
-            array_push($Clientes, $cliente);
+        if ($result !== false && $result->num_rows > 0) { // Asegúrate de que $result no sea falso
+            while ($item = $result->fetch_assoc()) {
+                $cliente = new Cliente();
+                $cliente->set('id', $item['id']);
+                $cliente->set('nombreCompleto', $item['nombreCompleto']);
+                $cliente->set('tipoDocumento', $item['tipoDocumento']);
+                $cliente->set('numeroDocumento', $item['numeroDocumento']);
+                $cliente->set('email', $item['email']);
+                $cliente->set('telefono', $item['telefono']);
+                $clientes[] = $cliente;
+            }
         }
         $dataBase->close();
         return $clientes;
@@ -32,8 +31,7 @@ class ClienteController
 
     function create($cliente)
     {
-        $sql = "insert into Clientes(nombreCompleto,tipoDocumento,numeroDocumento,email,telefono)values";
-        $sql .= "(";
+        $sql = "INSERT INTO clientes (nombreCompleto, tipoDocumento, numeroDocumento, email, telefono) VALUES (";
         $sql .= "'".$cliente->get('nombreCompleto')."',";
         $sql .= "'".$cliente->get('tipoDocumento')."',";
         $sql .= "'".$cliente->get('numeroDocumento')."',";
@@ -54,3 +52,4 @@ class ClienteController
     {
     }
 }
+?>

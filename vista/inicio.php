@@ -45,14 +45,11 @@ $articulos = $articuloController->read();
     <h1>Crear Factura</h1>
     <form action="../vista/registroFactura.php" method="post">
         <!-- Datos de la factura -->
-        <label for="refencia">Referencia:</label>
-        <input type="text" name="refencia" id="refencia" required>
-        <br>
         <label for="fecha">Fecha:</label>
         <input type="date" name="fecha" id="fecha" value="<?php echo date('Y-m-d'); ?>" required>
         <br>
-        <label for="idCliente">cliente:</label>
-        <input type="text" name="idCliente" id="idCliente"   required>
+        <label for="numeroDocumento">cliente:</label>
+        <input type="text" name="numeroDocumento" id="numeroDocumento" required>
         <br>
         <label for="estado">Estado:</label>
         <select name="estado" id="estado" required>
@@ -61,9 +58,6 @@ $articulos = $articuloController->read();
             <option value="Cambio">Cambio</option>
             <option value="Devolución">Devolución</option>
         </select>
-        <br>
-        <label for="descuento">descuento:</label>
-        <input type="text" name="descuento" id="descuento"   required>
         <br>
         <input type="submit" value="Generar Factura">
     </form>
@@ -74,7 +68,7 @@ $articulos = $articuloController->read();
             <li>
                 <strong>Numero De Serie:</strong> <?php echo $articulo->get('id'); ?>, 
                 <strong>Nombre:</strong> <?php echo $articulo->get('nombre'); ?>, 
-                <strong>Precio:</strong> <?php echo $articulo->get('precio'); ?>
+                <strong>Precio:</strong> <?php echo $articulo->get('precio'); ?><strong>$</strong>
             </li>
         <?php endforeach; ?>
     </ul>
