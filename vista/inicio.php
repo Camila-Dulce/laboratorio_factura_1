@@ -45,6 +45,9 @@ $articulos = $articuloController->read();
     <h1>Crear Factura</h1>
     <form action="../vista/registroFactura.php" method="post">
         <!-- Datos de la factura -->
+        <label for="refencia">referencia:</label>
+        <input type="text" name="refencia" id="refencia"required>
+        <br>
         <label for="fecha">Fecha:</label>
         <input type="date" name="fecha" id="fecha" value="<?php echo date('Y-m-d'); ?>" required>
         <br>
