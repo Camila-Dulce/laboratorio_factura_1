@@ -21,6 +21,7 @@ if (!$facturaData || !$facturaData['factura']) {
 
 $factura = $facturaData['factura'];
 $detalles = $facturaData['detalles'];
+$cliente = $facturaData['cliente'];
 
 $subtotal = 0;
 $descuento = 0; // Calcula el descuento según tus reglas de negocio
@@ -37,9 +38,12 @@ $descuento = 0; // Calcula el descuento según tus reglas de negocio
     <div>
         <h3>Cliente</h3>
         <ul>
-            <li>ID Cliente: <?php echo $factura['idCliente']; ?></li>
-            <li>Estado: <?php echo $factura['estado']; ?></li>
-            <li>Descuento: <?php echo $factura['descuento']; ?></li>
+            <li>ID Cliente: <?php echo $cliente['id']; ?></li>
+            <li>Nombre Completo: <?php echo $cliente['nombreCompleto']; ?></li>
+            <li>Tipo de Documento: <?php echo $cliente['tipoDocumento']; ?></li>
+            <li>Número de Documento: <?php echo $cliente['numeroDocumento']; ?></li>
+            <li>Email: <?php echo $cliente['email']; ?></li>
+            <li>Teléfono: <?php echo $cliente['telefono']; ?></li>
         </ul>
     </div>
 
@@ -86,6 +90,7 @@ $descuento = 0; // Calcula el descuento según tus reglas de negocio
     <a href="pestañaFactura.php">Volver</a>
 </body>
 </html>
+
 
 
 

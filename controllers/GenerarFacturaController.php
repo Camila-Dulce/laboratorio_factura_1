@@ -1,5 +1,4 @@
 <?php
-
 namespace App\controllers;
 
 use App\controllers\DataBaseController;
@@ -36,14 +35,28 @@ class GenerarFacturaController
             die("Error en la consulta de detalles de factura: " . $this->dbController->getLastError());
         }
 
+        // Obtener los datos del cliente utilizando la columna 'idCliente'
+        $clienteSql = "SELECT * FROM clientes WHERE id = '$clienteId'";
+        $clienteResult = $this->dbController->execSql($clienteSql);
+
+        if ($clienteResult === false) {
+            die("Error en la consulta de cliente: " . $this->dbController->getLastError());
+        }
+
+        $cliente = $clienteResult->fetch_assoc();
+        if (!$cliente) {
+            die("No se encontraron datos del cliente.");
+        }
+
         return [
             'factura' => $factura,
-            'detalles' => $detallesResult
+            'detalles' => $detallesResult,
+            'cliente' => $cliente
         ];
     }
 }
-?>
 
+?>
 
 
 
