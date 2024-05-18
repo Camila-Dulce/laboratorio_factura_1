@@ -13,29 +13,28 @@ class GenerarFacturaController
         $this->dbController = new DataBaseController();
     }
 
-    public function getFacturaData($clienteId, $facturaId)
+    public function getFacturaData($clienteId, $facturaReferencia)
     {
-        // Obtener los datos del cliente
-        $clienteSql = "SELECT * FROM clientes WHERE id = $clienteId";
-        $clienteResult = $this->dbController->execSql($clienteSql);
-        $cliente = $clienteResult->fetch_assoc();
-
-        // Obtener los datos de la factura
-        $facturaSql = "SELECT * FROM facturas WHERE id = $facturaId";
+        // Obtener los datos de la factura utilizando la columna 'idCliente' y 'refencia'
+        $facturaSql = "SELECT * FROM facturas WHERE idCliente = $clienteId AND refencia = '$facturaReferencia'";
         $facturaResult = $this->dbController->execSql($facturaSql);
         $factura = $facturaResult->fetch_assoc();
 
-        // Obtener los detalles de la factura
-        $detallesSql = "SELECT * FROM detallefacturas WHERE refenciaFactura = '{$factura['id']}'";
+        // Obtener los detalles de la factura utilizando la columna 'referenciaFactura'
+        $detallesSql = "SELECT * FROM detallefacturas WHERE refenciaFactura = '{$factura['referencia']}'";
         $detallesResult = $this->dbController->execSql($detallesSql);
 
         return [
-            'cliente' => $cliente,
             'factura' => $factura,
             'detalles' => $detallesResult
         ];
     }
 }
 ?>
+
+
+
+
+
 
 

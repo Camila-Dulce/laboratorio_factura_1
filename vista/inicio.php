@@ -94,13 +94,11 @@ $numFacturas = $facturaController->getCount() + 1;
         <label for="idArticulo">ID Artículo:</label>
         <input type="number" name="idArticulo" id="idArticulo" required>
         <br>
-        <a href="detalleFactura.php">
-    <button>Generar Factura</button>
-  </a> 
+    <button> Factura</button>
     </form>
 
     <a href="detalleFactura.php">
-    <button>Generar Factura</button>
+    <button>Mostrar Factura Generada</button>
   </a>
 </body>
 </html>
