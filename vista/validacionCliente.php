@@ -36,13 +36,13 @@
 
     // Verificar si el cliente ya está registrado
     if ($cliente->verificarCliente($numeroDocumento)) {
-        echo "El cliente ya está registrado en la base de datos.";
+        echo 'El cliente ya está registrado en la base de datos. <a href="../vista/pestañaFactura.php">crear factur</a>';
     } else {
         // Registrar al cliente
         if ($cliente->registrarCliente($nombreCompleto, $tipoDocumento, $numeroDocumento, $email, $telefono)) {
-            echo "Cliente registrado exitosamente.";
+            echo 'Cliente registrado exitosamente. <a href="../vista/pestañaFactura.php">Crear factura</a>';
         } else {
-            echo "Error al registrar el cliente.";
+            echo 'Error al registrar el cliente. <a href="../vista/pestañaCliente.php">Volver a intentar</a>';
         }
     }
 
@@ -50,7 +50,7 @@
     $db->close();
     ?>
     <br>
-    <a href="../vista/inicio.php">Volver</a>
 </body>
 </html>
+
 

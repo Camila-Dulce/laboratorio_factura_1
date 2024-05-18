@@ -44,7 +44,7 @@ $result = $controller->crear($DetalleFactura);
 <body>
     <h1><?php echo $result ? 'Datos guardados' : 'No se pudo guardar el registro'; ?></h1>
     <br>
-    <a href="../vista/pestañaDetalleFactura.php">Volver</a>
+    <a href="../vista/pestañaDetalleFactura.php">Agregar mas produtos a la Factura</a>
     <li><strong>cantidad:</strong> <?php echo $DetalleFactura->get('cantidad'); ?></li>
         <li><strong>Precio:</strong> <?php echo $DetalleFactura->get('precioUnitario'); ?></li>
         <li><strong>ID Aticulo:</strong> <?php echo $DetalleFactura->get('idArticulo'); ?></li>

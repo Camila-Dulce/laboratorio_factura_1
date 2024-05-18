@@ -14,25 +14,38 @@ use App\controllers\ClienteController;
 $clienteController = new ClienteController();
 $clientes = $clienteController->read();
 $idcliente = null;
+$result = false; // Inicializamos la variable $result
 
 if (is_array($clientes) && count($clientes) > 0) {
-    foreach ($clientes as $cliente): 
-        if($cliente->get('numeroDocumento') == $_POST['numeroDocumento'] ){ 
-           $idcliente = $cliente->get('id');
+    foreach ($clientes as $cliente) { 
+        if ($cliente->get('numeroDocumento') == $_POST['numeroDocumento']) { 
+            $idcliente = $cliente->get('id');
+            break;
         }
-    endforeach;
+    }
 }
 
-$controller = new FacturaController();
-$factura = new Factura();
-$factura->set('refencia', $_POST['referencia']);
-$factura->set('fecha', $_POST['fecha']);
-$factura->set('idCliente', $idcliente);
-$factura->set('estado', $_POST['estado']);
-$factura->set('descuento', 0);
+if ($idcliente === null) {
+    $mensaje = 'El cliente no está en la base de datos <a href="../vista/pestañaCliente.php">deseas reguistrar el cliente?</a>';
+} else {
+    $controller = new FacturaController();
+    $factura = new Factura();
+    $factura->set('refencia', $_POST['referencia']);
+    $factura->set('fecha', $_POST['fecha']);
+    $factura->set('idCliente', $idcliente);
+    $factura->set('estado', $_POST['estado']);
+    $factura->set('descuento', 0);
 
-$result = $controller->guardarFactura($factura);
+    $result = $controller->guardarFactura($factura);
+
+    if ($result) {
+        $mensaje = 'Datos guardados <a href="../vista/pestañaDetalleFactura.php">agregar los articulos de la factura </a>';
+    } else {
+        $mensaje = 'No se pudo guardar el registro <a href="../vista/pestañaFactura.php">Volver a crear la factura</a>';
+    }
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -41,17 +54,17 @@ $result = $controller->guardarFactura($factura);
     <title>Registrar Factura</title>
 </head>
 <body>
-    <h1><?php echo $result ? 'Datos guardados' : 'No se pudo guardar el registro'; ?></h1>
+    <h1><?php echo $mensaje; ?></h1>
+    <?php if ($result): ?>
+        <h2>Datos de la factura:</h2>
+        <ul>
+            <li><strong>Referencia:</strong> <?php echo $factura->get('refencia'); ?></li>
+            <li><strong>Fecha:</strong> <?php echo $factura->get('fecha'); ?></li>
+            <li><strong>ID Cliente:</strong> <?php echo $factura->get('idCliente'); ?></li>
+            <li><strong>Estado:</strong> <?php echo $factura->get('estado'); ?></li>
+            <li><strong>Descuento:</strong> <?php echo $factura->get('descuento'); ?></li>
+        </ul>
+    <?php endif; ?>
     <br>
-    <h2>Datos de la factura:</h2>
-    <ul>
-        <li><strong>Referencia:</strong> <?php echo $factura->get('refencia'); ?></li>
-        <li><strong>Fecha:</strong> <?php echo $factura->get('fecha'); ?></li>
-        <li><strong>ID Cliente:</strong> <?php echo $factura->get('idCliente'); ?></li>
-        <li><strong>Estado:</strong> <?php echo $factura->get('estado'); ?></li>
-        <li><strong>Descuento:</strong> <?php echo $factura->get('descuento'); ?></li>
-    </ul>
-    <br>
-    <a href="../vista/pestañaDetalleFactura.php">Volver</a>
 </body>
 </html>
