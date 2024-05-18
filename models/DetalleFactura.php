@@ -6,7 +6,7 @@ class DetalleFactura extends Model
     protected $cantidad = 0;
     protected $precioUnitario = 0;
     protected $idArticulo = 0;
-    protected $refenciaFactura = ""; // Corregido nombre del atributo
+    protected $refenciaFactura = 0; // Corregido nombre del atributo
 
     public function factura()
     {

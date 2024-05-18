@@ -1,8 +1,15 @@
 <?php
 require_once '../controllers/ArticuloController.php';
+require_once '../controllers/FacturaController.php';
 
-$articuloController = new App\controllers\ArticuloController();
+use App\controllers\ArticuloController;
+use App\controllers\FacturaController;
+
+$articuloController = new ArticuloController();
 $articulos = $articuloController->read();
+
+$facturaController = new FacturaController();
+$numFacturas = $facturaController->getCount() + 1;
 ?>
 
 <!DOCTYPE html>
@@ -21,10 +28,10 @@ $articulos = $articuloController->read();
         <br>
         <label for="tipoDocumento">Tipo de documento:</label><br>
         <select id="tipoDocumento" name="tipoDocumento" required>
-        <option value="cc">Cédula de ciudadania</option>
-        <option value="Carnet de extranjería">Carnet de extranjería</option>
-        <option value="NIT">NIT</option>
-        <option value="TI">Tarjeta de identidad</option>
+            <option value="cc">Cédula de ciudadania</option>
+            <option value="Carnet de extranjería">Carnet de extranjería</option>
+            <option value="NIT">NIT</option>
+            <option value="TI">Tarjeta de identidad</option>
         </select><br><br>
         <br>
         <label for="numeroDocumento">Número Documento:</label>
@@ -39,31 +46,31 @@ $articulos = $articuloController->read();
         <input type="submit" value="Validar Cliente">
     </form>
     <form action="listaClientes.php" method="GET">
-    <input type="submit" value="Actualizar Datos">
-</form>
+        <input type="submit" value="Actualizar Datos">
+    </form>
 
     <h1>Crear Factura</h1>
     <form action="../vista/registroFactura.php" method="post">
-        <!-- Datos de la factura -->
-        <label for="refencia">referencia:</label>
-        <input type="text" name="refencia" id="refencia"required>
-        <br>
-        <label for="fecha">Fecha:</label>
-        <input type="date" name="fecha" id="fecha" value="<?php echo date('Y-m-d'); ?>" required>
-        <br>
-        <label for="numeroDocumento">cliente:</label>
-        <input type="text" name="numeroDocumento" id="numeroDocumento" required>
-        <br>
-        <label for="estado">Estado:</label>
-        <select name="estado" id="estado" required>
-            <option value="Pagada">Pagada</option>
-            <option value="Error">Error</option>
-            <option value="Cambio">Cambio</option>
-            <option value="Devolución">Devolución</option>
-        </select>
-        <br>
-        <input type="submit" value="Generar Factura">
-    </form>
+    <!-- Datos de la factura -->
+    <h1 id="referencia">Referencia: <?php echo $numFacturas; ?></h1>
+    <input type="hidden" name="referencia" value="<?php echo $numFacturas=$numFacturas-1; ?>"> <!-- Agregamos un campo oculto para enviar el número de referencia -->
+    <label for="fecha">Fecha:</label>
+    <input type="date" name="fecha" id="fecha" value="<?php echo date('Y-m-d'); ?>" required>
+    <br>
+    <label for="numeroDocumento">Cliente:</label>
+    <input type="text" name="numeroDocumento" id="numeroDocumento" required>
+    <br>
+    <label for="estado">Estado:</label>
+    <select name="estado" id="estado" required>
+        <option value="Pagada">Pagada</option>
+        <option value="Error">Error</option>
+        <option value="Cambio">Cambio</option>
+        <option value="Devolución">Devolución</option>
+    </select>
+    <br>
+    <input type="submit" value="Generar Factura">
+</form>
+
 
     <h1>Lista de Artículos</h1>
     <ul>
@@ -78,16 +85,16 @@ $articulos = $articuloController->read();
 
     <form action="../vista/registroDetalleFactura.php" method="post">     
         <!-- Detalles de la factura -->
+        <h1 id="refenciaFactura">Referencia de la factura que se guardan los productos: <?php echo $numFacturas; ?></h1>
+        <input type="hidden" name="refenciaFactura" value="<?php echo $numFacturas; ?>">
         <h2>Detalles de la Factura</h2>
         <label for="cantidad">Cantidad:</label>
         <input type="number" name="cantidad" id="cantidad" required>
         <br>
-        <label for="idArticulo">idArticulo:</label>
+        <label for="idArticulo">ID Artículo:</label>
         <input type="number" name="idArticulo" id="idArticulo" required>
         <br>
         <input type="submit" value="Generar Factura">
     </form>
-
 </body>
 </html>
-

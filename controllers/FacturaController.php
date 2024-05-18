@@ -74,6 +74,20 @@ class FacturaController
         $dataBase->close();
         return $result;
     }
+
+    private $dbController;
+
+    public function __construct()
+    {
+        $this->dbController = new DataBaseController();
+    }
+
+    public function getCount()
+    {
+        $result = $this->dbController->execSql("SELECT COUNT(*) as total FROM facturas");
+        $row = $result->fetch_assoc();
+        return $row['total'];
+    }
 }
 ?>
 

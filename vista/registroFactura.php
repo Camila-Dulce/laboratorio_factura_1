@@ -25,7 +25,7 @@ if (is_array($clientes) && count($clientes) > 0) {
 
 $controller = new FacturaController();
 $factura = new Factura();
-$factura->set('refencia', $_POST['refencia']);
+$factura->set('refencia', $_POST['referencia']);
 $factura->set('fecha', $_POST['fecha']);
 $factura->set('idCliente', $idcliente);
 $factura->set('estado', $_POST['estado']);
