@@ -22,6 +22,11 @@ class DataBaseController
         );
     }
 
+    public function getConexion()
+    {
+        return $this->conex;
+    }
+
     function execSql($sql)
     {
         return $this->conex->query($sql);
@@ -32,3 +37,4 @@ class DataBaseController
         $this->conex->close();
     }
 }
+?>

@@ -5,12 +5,11 @@ require_once '../controllers/GenerarFacturaController.php';
 use App\controllers\GenerarFacturaController;
 
 $clienteId = 1; // Obtén el ID del cliente de la manera adecuada
-$facturaId = 1; // Obtén el ID de la factura de la manera adecuada
+$facturaReferencia = 'FACT001'; // Obtén la referencia de la factura de la manera adecuada
 
 $facturaController = new GenerarFacturaController();
-$facturaData = $facturaController->getFacturaData($clienteId, $facturaId);
+$facturaData = $facturaController->getFacturaData($clienteId, $facturaReferencia);
 
-$cliente = $facturaData['cliente'];
 $factura = $facturaData['factura'];
 $detalles = $facturaData['detalles'];
 
@@ -29,17 +28,17 @@ $descuento = 0; // Calcula el descuento según tus reglas de negocio
     <div>
         <h3>Cliente</h3>
         <ul>
-            <li>Nombre: <?php echo $cliente['nombre']; ?></li>
-            <li>Tipo de documento: <?php echo $cliente['tipo_documento']; ?></li>
-            <li>Número de documento: <?php echo $cliente['numero_documento']; ?></li>
-            <li>Teléfono: <?php echo $cliente['telefono']; ?></li>
-            <li>Email: <?php echo $cliente['email']; ?></li>
+            <li>Nombre: <?php echo $factura['nombre']; ?></li>
+            <li>Tipo de documento: <?php echo $factura['tipo_documento']; ?></li>
+            <li>Número de documento: <?php echo $factura['numero_documento']; ?></li>
+            <li>Teléfono: <?php echo $factura['telefono']; ?></li>
+            <li>Email: <?php echo $factura['email']; ?></li>
         </ul>
     </div>
 
     <div>
         <ul>
-            <li>N° de Factura: <?php echo $factura['id']; ?></li>
+            <li>N° de Factura: <?php echo $factura['referencia']; ?></li>
             <li>Fecha: <?php echo $factura['fecha']; ?></li>
         </ul>
     </div>
