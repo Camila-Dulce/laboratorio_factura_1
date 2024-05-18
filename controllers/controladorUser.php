@@ -55,7 +55,7 @@ if (isset($_POST['usuario']) && isset($_POST['password'])) {
 
     if ($controlador->validarUsuario($usuario, $password)) {
         // Usuario válido, redirigir a generadorFactura.php
-        header("Location: inicio.php");
+        header("Location: pestañaFactura.php");
         exit;
     } else {
         // Usuario inválido, redirigir a una página de error
@@ -64,10 +64,3 @@ if (isset($_POST['usuario']) && isset($_POST['password'])) {
     }
 }
 ?>
-
-
-
-
-
-
-

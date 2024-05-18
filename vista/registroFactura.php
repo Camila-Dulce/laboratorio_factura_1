@@ -52,6 +52,6 @@ $result = $controller->guardarFactura($factura);
         <li><strong>Descuento:</strong> <?php echo $factura->get('descuento'); ?></li>
     </ul>
     <br>
-    <a href="../vista/inicio.php">Volver</a>
+    <a href="../vista/pestañaDetalleFactura.php">Volver</a>
 </body>
 </html>

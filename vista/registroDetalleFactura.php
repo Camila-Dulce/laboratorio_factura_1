@@ -25,7 +25,6 @@ foreach ($articulos as $articulo):
     }
 endforeach;
 
-$referenciaFactura = 102123; // Asumo que esta es una referencia de ejemplo.
 
 $DetalleFactura->set('cantidad', $_POST['cantidad']);
 $DetalleFactura->set('precioUnitario', $Preciounitario);
@@ -46,7 +45,7 @@ $result = $controller->crear($DetalleFactura);
 <body>
     <h1><?php echo $result ? 'Datos guardados' : 'No se pudo guardar el registro'; ?></h1>
     <br>
-    <a href="../vista/inicio.php">Volver</a>
+    <a href="../vista/pestañaDetalleFactura.php">Volver</a>
     <li><strong>cantidad:</strong> <?php echo $DetalleFactura->get('cantidad'); ?></li>
         <li><strong>Precio:</strong> <?php echo $DetalleFactura->get('precioUnitario'); ?></li>
         <li><strong>ID Aticulo:</strong> <?php echo $DetalleFactura->get('idArticulo'); ?></li>
