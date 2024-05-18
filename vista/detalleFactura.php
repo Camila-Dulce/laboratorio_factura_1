@@ -4,11 +4,20 @@ require_once '../controllers/GenerarFacturaController.php';
 
 use App\controllers\GenerarFacturaController;
 
-$clienteId = 1; // Obtén el ID del cliente de la manera adecuada
-$facturaReferencia = 'FACT001'; // Obtén la referencia de la factura de la manera adecuada
+// Obtener los valores enviados desde el formulario
+$clienteId = isset($_GET['clienteId']) ? intval($_GET['clienteId']) : null;
+$referencia = isset($_GET['referencia']) ? $_GET['referencia'] : null;
+
+if ($clienteId === null || $referencia === null) {
+    die("Error: ID de cliente o referencia de factura no proporcionados.");
+}
 
 $facturaController = new GenerarFacturaController();
-$facturaData = $facturaController->getFacturaData($clienteId, $facturaReferencia);
+$facturaData = $facturaController->getFacturaData($clienteId, $referencia);
+
+if (!$facturaData || !$facturaData['factura']) {
+    die("Error: No se encontraron datos de la factura.");
+}
 
 $factura = $facturaData['factura'];
 $detalles = $facturaData['detalles'];
@@ -28,17 +37,15 @@ $descuento = 0; // Calcula el descuento según tus reglas de negocio
     <div>
         <h3>Cliente</h3>
         <ul>
-            <li>Nombre: <?php echo $factura['nombre']; ?></li>
-            <li>Tipo de documento: <?php echo $factura['tipo_documento']; ?></li>
-            <li>Número de documento: <?php echo $factura['numero_documento']; ?></li>
-            <li>Teléfono: <?php echo $factura['telefono']; ?></li>
-            <li>Email: <?php echo $factura['email']; ?></li>
+            <li>ID Cliente: <?php echo $factura['idCliente']; ?></li>
+            <li>Estado: <?php echo $factura['estado']; ?></li>
+            <li>Descuento: <?php echo $factura['descuento']; ?></li>
         </ul>
     </div>
 
     <div>
         <ul>
-            <li>N° de Factura: <?php echo $factura['referencia']; ?></li>
+            <li>N° de Factura: <?php echo $factura['refencia']; ?></li>
             <li>Fecha: <?php echo $factura['fecha']; ?></li>
         </ul>
     </div>
@@ -53,12 +60,12 @@ $descuento = 0; // Calcula el descuento según tus reglas de negocio
         </tr>
         <?php
         while($detalle = $detalles->fetch_assoc()) {
-            $valor = $detalle['cantidad'] * $detalle['precio_unitario'];
+            $valor = $detalle['cantidad'] * $detalle['precioUnitario'];
             $subtotal += $valor;
             echo "<tr>";
             echo "<td>{$detalle['cantidad']}</td>";
-            echo "<td>{$detalle['descripcion']}</td>";
-            echo "<td>{$detalle['precio_unitario']}</td>";
+            echo "<td>{$detalle['idArticulo']}</td>";
+            echo "<td>{$detalle['precioUnitario']}</td>";
             echo "<td>{$valor}</td>";
             echo "</tr>";
         }
@@ -76,9 +83,15 @@ $descuento = 0; // Calcula el descuento según tus reglas de negocio
     </table>
 
     <br>
-    <a href="listaClientes.php">Volver</a>
+    <a href="pestañaFactura.php">Volver</a>
 </body>
 </html>
+
+
+
+
+
+
 
 
 

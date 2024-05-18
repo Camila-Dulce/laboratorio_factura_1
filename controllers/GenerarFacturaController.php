@@ -13,16 +13,28 @@ class GenerarFacturaController
         $this->dbController = new DataBaseController();
     }
 
-    public function getFacturaData($clienteId, $facturaReferencia)
+    public function getFacturaData($clienteId, $referencia)
     {
-        // Obtener los datos de la factura utilizando la columna 'idCliente' y 'refencia'
-        $facturaSql = "SELECT * FROM facturas WHERE idCliente = $clienteId AND refencia = '$facturaReferencia'";
+        // Obtener los datos de la factura utilizando la columna 'referencia'
+        $facturaSql = "SELECT * FROM facturas WHERE refencia = '$referencia'";
         $facturaResult = $this->dbController->execSql($facturaSql);
-        $factura = $facturaResult->fetch_assoc();
 
-        // Obtener los detalles de la factura utilizando la columna 'referenciaFactura'
-        $detallesSql = "SELECT * FROM detallefacturas WHERE refenciaFactura = '{$factura['referencia']}'";
+        if ($facturaResult === false) {
+            die("Error en la consulta de factura: " . $this->dbController->getLastError());
+        }
+
+        $factura = $facturaResult->fetch_assoc();
+        if (!$factura) {
+            die("No se encontraron datos de la factura.");
+        }
+
+        // Obtener los detalles de la factura utilizando la columna 'refenciaFactura'
+        $detallesSql = "SELECT * FROM detallefacturas WHERE refenciaFactura = '$referencia'";
         $detallesResult = $this->dbController->execSql($detallesSql);
+
+        if ($detallesResult === false) {
+            die("Error en la consulta de detalles de factura: " . $this->dbController->getLastError());
+        }
 
         return [
             'factura' => $factura,
@@ -31,6 +43,10 @@ class GenerarFacturaController
     }
 }
 ?>
+
+
+
+
 
 
 

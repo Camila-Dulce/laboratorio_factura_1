@@ -49,6 +49,9 @@ $result = $controller->crear($DetalleFactura);
         <li><strong>Precio:</strong> <?php echo $DetalleFactura->get('precioUnitario'); ?></li>
         <li><strong>ID Aticulo:</strong> <?php echo $DetalleFactura->get('idArticulo'); ?></li>
         <li><strong>referenciaFactura:</strong> <?php echo $DetalleFactura->get('refenciaFactura'); ?></li>
+
+        <br>
+    <a href="pestañaFactura.php">Volver</a>
 </body>
 </html>
 

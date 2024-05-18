@@ -66,5 +66,7 @@ if ($idcliente === null) {
         </ul>
     <?php endif; ?>
     <br>
+    <br>
+    <a href="pestañaFactura.php">Volver</a>
 </body>
 </html>

@@ -44,9 +44,7 @@ $numFacturas = $facturaController->getCount() + 1;
         <br>
         <input type="submit" value="Generar Factura">
     </form>
-    
-    <a href="detalleFactura.php">
-    <button>Mostrar Factura Generada</button>
-  </a>
+    <br>
+    <a href="pestañaFactura.php">Volver</a>
 </body>
 </html>
