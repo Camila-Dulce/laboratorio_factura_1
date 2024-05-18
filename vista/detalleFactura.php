@@ -5,7 +5,7 @@ require_once '../controllers/GenerarFacturaController.php';
 use App\controllers\GenerarFacturaController;
 
 // Obtener los valores enviados desde el formulario
-$clienteId = isset($_GET['clienteId']) ? intval($_GET['clienteId']) : null;
+$clienteId = isset($_GET['numeroDocumento']) ? intval($_GET['numeroDocumento']) : null;
 $referencia = isset($_GET['referencia']) ? $_GET['referencia'] : null;
 
 if ($clienteId === null || $referencia === null) {
@@ -24,7 +24,27 @@ $detalles = $facturaData['detalles'];
 $cliente = $facturaData['cliente'];
 
 $subtotal = 0;
-$descuento = 0; // Calcula el descuento según tus reglas de negocio
+
+// Calcular el subtotal
+while ($detalle = $detalles->fetch_assoc()) {
+    $valor = $detalle['cantidad'] * $detalle['precioUnitario'];
+    $subtotal += $valor;
+}
+
+// Calcular el descuento basado en el subtotal
+$descuento = 0;
+$porcentajeDescuento = 0;
+
+if ($subtotal > 650000) {
+    $porcentajeDescuento = 8;
+} elseif ($subtotal > 200000) {
+    $porcentajeDescuento = 4;
+} elseif ($subtotal > 100000) {
+    $porcentajeDescuento = 2;
+}
+
+$descuento = ($subtotal * $porcentajeDescuento) / 100;
+$total = $subtotal - $descuento;
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -38,10 +58,9 @@ $descuento = 0; // Calcula el descuento según tus reglas de negocio
     <div>
         <h3>Cliente</h3>
         <ul>
-            <li>ID Cliente: <?php echo $cliente['id']; ?></li>
+            <li>Número de Documento: <?php echo $cliente['numeroDocumento']; ?></li>
             <li>Nombre Completo: <?php echo $cliente['nombreCompleto']; ?></li>
             <li>Tipo de Documento: <?php echo $cliente['tipoDocumento']; ?></li>
-            <li>Número de Documento: <?php echo $cliente['numeroDocumento']; ?></li>
             <li>Email: <?php echo $cliente['email']; ?></li>
             <li>Teléfono: <?php echo $cliente['telefono']; ?></li>
         </ul>
@@ -63,9 +82,10 @@ $descuento = 0; // Calcula el descuento según tus reglas de negocio
             <th>Valor</th>
         </tr>
         <?php
-        while($detalle = $detalles->fetch_assoc()) {
+        // Reiniciar el puntero del resultado de los detalles
+        $detalles->data_seek(0);
+        while ($detalle = $detalles->fetch_assoc()) {
             $valor = $detalle['cantidad'] * $detalle['precioUnitario'];
-            $subtotal += $valor;
             echo "<tr>";
             echo "<td>{$detalle['cantidad']}</td>";
             echo "<td>{$detalle['idArticulo']}</td>";
@@ -73,23 +93,20 @@ $descuento = 0; // Calcula el descuento según tus reglas de negocio
             echo "<td>{$valor}</td>";
             echo "</tr>";
         }
-        $total = $subtotal - $descuento;
         ?>
     </table>
 
     <h3>Subtotal: <?php echo $subtotal; ?></h3>
-    <h3>Descuento: <?php echo $descuento; ?></h3>
-
-    <table>
-        <tr>
-            <td>Total: <?php echo $total; ?></td>
-        </tr>
-    </table>
+    <?php if ($porcentajeDescuento > 0): ?>
+        <h3>Descuento (<?php echo $porcentajeDescuento; ?>%): <?php echo $descuento; ?></h3>
+    <?php endif; ?>
+    <h3>Total: <?php echo $total; ?></h3>
 
     <br>
     <a href="pestañaFactura.php">Volver</a>
 </body>
 </html>
+
 
 
 
