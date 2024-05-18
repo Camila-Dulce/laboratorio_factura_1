@@ -1,18 +1,27 @@
 <?php
-
 namespace App\models;
 
-class DetalleFactura
+class DetalleFactura extends Model
 {
-    public $refencia;
-    public $idArticulo;
-    public $precioUnitario;
+    protected $cantidad = 0;
+    protected $precioUnitario = 0;
+    protected $idArticulo = 0;
+    protected $refenciaFactura = 0; // Corregido nombre del atributo
 
-    function __construct($refencia, $idArticulo, $precioUnitario)
+    public function factura()
     {
-        $this->refencia = $refencia;
-        $this->idArticulo = $idArticulo;
-        $this->precioUnitario = $precioUnitario;
+        return $this->belongsTo(Factura::class, 'refenciaFactura'); // Corregido nombre del atributo
+    }
+
+    public function articulo()
+    {
+        return $this->belongsTo(Articulo::class, 'idArticulo');
+    }
+
+    public function precio()
+    {
+        return $this->belongsTo(Articulo::class, 'precioUnitario');
     }
 }
+?>
 

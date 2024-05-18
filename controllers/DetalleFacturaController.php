@@ -3,44 +3,47 @@
 namespace App\controllers;
 
 use App\models\DetalleFactura;
-use mysqli_sql_exception;
+use App\controllers\DataBaseController; // Corregido
 
 class DetalleFacturaController
 {
-    private $dbController;
-
-    function __construct()
+    function read()
     {
-        $this->dbController = new DataBaseController();
+        $dataBase = new DataBaseController();
+        $sql = "select * from contactos";
+        $result = $dataBase->execSql($sql);
+        $Detallefacturas = [];
+        if ($result->num_rows == 0) {
+            return $Detallefacturas;
+        }
+        while ($item = $result->fetch_assoc()) {
+            $Detallefactura = new DetalleFactura();
+            $referencia = " " ;
+            $Detallefactura->set('cantidad', $item['cantidad']);
+            $Detallefactura->set('precioUnitario', $item['precioUnitario']);
+            $Detallefactura->set('idArticulo', $item['idArticulo']);
+            $Detallefactura->set('refenciaFactuara', $item['refenciaFactuara']);
+            array_push($Detallefacturas, $Detallefactura);
+        }
+        $dataBase->close();
+        return $Detallefacturas;
     }
 
-    function crear(DetalleFactura $detalleFactura, $idCliente)
+    function crear($DetalleFactura) // Corregido el nombre del parámetro
     {
-        try {
-            // Inserción en la tabla facturas
-            $sqlFactura = "INSERT INTO facturas (refencia, idCliente) VALUES ('{$detalleFactura->refencia}', '$idCliente')";
-            if ($this->dbController->execSql($sqlFactura)) {
-                // Verificar si la factura fue insertada correctamente
-                if ($this->dbController->conex->affected_rows > 0) {
-                    // Inserción en la tabla detallefacturas
-                    $sqlDetalle = "INSERT INTO detallefacturas (refenciaFactura, idArticulo, precioUnitario) VALUES ('{$detalleFactura->refencia}', '{$detalleFactura->idArticulo}', '{$detalleFactura->precioUnitario}')";
-                    if ($this->dbController->execSql($sqlDetalle)) {
-                        return true; // Éxito
-                    } else {
-                        throw new mysqli_sql_exception("Error al insertar en detallefacturas: " . $this->dbController->conex->error);
-                    }
-                } else {
-                    throw new mysqli_sql_exception("No se pudo insertar la factura: " . $this->dbController->conex->error);
-                }
-            } else {
-                throw new mysqli_sql_exception("Error al insertar en facturas: " . $this->dbController->conex->error);
-            }
-        } catch (mysqli_sql_exception $e) {
-            echo "Error: " . $e->getMessage();
-            return false;
-        }
+        $sql = "INSERT INTO detallefacturas (cantidad, precioUnitario, idArticulo, refenciaFactura ) VALUES (";
+        $sql .= "'".$DetalleFactura->get('cantidad')."',"; // Corregido
+        $sql .= "'".$DetalleFactura->get('precioUnitario')."',"; // Corregido
+        $sql .= "'".$DetalleFactura->get('idArticulo')."',"; // Corregido
+        $sql .= "'".$DetalleFactura->get('refenciaFactura')."'"; // Corregido
+        $sql .= ")";
+        $dataBase = new DataBaseController();
+        $result = $dataBase->execSql($sql);
+        $dataBase->close();
+        return $result;
     }
 }
+?>
 
 
 

@@ -1,35 +1,38 @@
 <?php
-
-// Incluir los archivos necesarios
-require_once __DIR__ . '/../controllers/DataBaseController.php';
-require_once __DIR__ . '/../controllers/DetalleFacturaController.php';
-require_once __DIR__ . '/../models/DetalleFactura.php';
+require_once '../models/Model.php';
+require_once '../models/DetalleFactura.php';
+require_once '../controllers/DetalleFacturaController.php';
+require_once '../controllers/DataBaseController.php';
+require_once '../controllers/ArticuloController.php'; // Agregado
 
 use App\controllers\DetalleFacturaController;
 use App\models\DetalleFactura;
+use App\controllers\ArticuloController; // Agregado
 
-$result = false;
-$detalleFactura = null;
+$controller = new DetalleFacturaController();
+$DetalleFactura = new DetalleFactura();
+$articuloController = new ArticuloController(); // Agregado
 
-// Verificar que los valores existen en $_POST antes de usarlos
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['refencia'], $_POST['idArticulo'], $_POST['precioUnitario'], $_POST['idCliente'])) {
-        // Captura de datos del formulario
-        $refencia = $_POST['refencia'];
-        $idArticulo = $_POST['idArticulo'];
-        $precioUnitario = $_POST['precioUnitario'];
-        $idCliente = $_POST['idCliente'];
+$Preciounitario = null;
+$referenciaFactura = null;
 
-        // Crear el objeto DetalleFactura
-        $detalleFactura = new DetalleFactura($refencia, $idArticulo, $precioUnitario);
+$articulos = $articuloController->read(); // Agregado
 
-        // Crear el controlador y llamar a la función crear
-        $controller = new DetalleFacturaController();
-        $result = $controller->crear($detalleFactura, $idCliente);
-    } else {
-        echo "Error: faltan datos del formulario.";
+
+foreach ($articulos as $articulo): 
+    if($articulo->get('id') == $_POST['idArticulo'] ){
+       $Preciounitario = $articulo->get('precio');
     }
-}
+endforeach;
+
+$referenciaFactura = 102123; // Asumo que esta es una referencia de ejemplo.
+
+$DetalleFactura->set('cantidad', $_POST['cantidad']);
+$DetalleFactura->set('precioUnitario', $Preciounitario);
+$DetalleFactura->set('idArticulo', $_POST['idArticulo']);
+$DetalleFactura->set('refenciaFactura', $_POST['refenciaFactura']);
+
+$result = $controller->crear($DetalleFactura);
 ?>
 
 <!DOCTYPE html>
@@ -42,15 +45,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <h1><?php echo $result ? 'Datos guardados' : 'No se pudo guardar el registro'; ?></h1>
     <br>
-    <?php if ($detalleFactura): ?>
-        <ul>
-            <li><strong>Cantidad:</strong> <?php echo $detalleFactura->idArticulo; ?></li>
-            <li><strong>Precio:</strong> <?php echo $detalleFactura->precioUnitario; ?></li>
-            <li><strong>ID Artículo:</strong> <?php echo $detalleFactura->idArticulo; ?></li>
-            <li><strong>Referencia Factura:</strong> <?php echo $detalleFactura->refencia; ?></li>
-        </ul>
-    <?php endif; ?>
     <a href="../vista/inicio.php">Volver</a>
+    <li><strong>cantidad:</strong> <?php echo $DetalleFactura->get('cantidad'); ?></li>
+        <li><strong>Precio:</strong> <?php echo $DetalleFactura->get('precioUnitario'); ?></li>
+        <li><strong>ID Aticulo:</strong> <?php echo $DetalleFactura->get('idArticulo'); ?></li>
+        <li><strong>referenciaFactura:</strong> <?php echo $DetalleFactura->get('refenciaFactura'); ?></li>
 </body>
 </html>
 
