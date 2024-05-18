@@ -86,7 +86,7 @@ $numFacturas = $facturaController->getCount() + 1;
     <form action="../vista/registroDetalleFactura.php" method="post">     
         <!-- Detalles de la factura -->
         <h1 id="refenciaFactura">Referencia de la factura que se guardan los productos: <?php echo $numFacturas=$numFacturas-1; ?></h1>
-        <input type="hidden" name="refenciaFactura" value="<?php echo $numFacturas=$numFacturas-1; ?>">
+        <input type="hidden" name="refenciaFactura" value="<?php echo $numFacturas; ?>">
         <h2>Detalles de la Factura</h2>
         <label for="cantidad">Cantidad:</label>
         <input type="number" name="cantidad" id="cantidad" required>
@@ -94,7 +94,13 @@ $numFacturas = $facturaController->getCount() + 1;
         <label for="idArticulo">ID Artículo:</label>
         <input type="number" name="idArticulo" id="idArticulo" required>
         <br>
-        <input type="submit" value="Generar Factura">
+        <a href="detalleFactura.php">
+    <button>Generar Factura</button>
+  </a> 
     </form>
+
+    <a href="detalleFactura.php">
+    <button>Generar Factura</button>
+  </a>
 </body>
 </html>

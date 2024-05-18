@@ -24,3 +24,4 @@ class DetalleFactura extends Model
     }
 }
 ?>
+

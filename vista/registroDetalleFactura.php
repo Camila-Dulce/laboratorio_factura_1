@@ -32,7 +32,6 @@ $DetalleFactura->set('idArticulo', $_POST['idArticulo']);
 $DetalleFactura->set('refenciaFactura', $_POST['refenciaFactura']);
 
 $result = $controller->crear($DetalleFactura);
-
 ?>
 
 <!DOCTYPE html>
@@ -52,3 +51,5 @@ $result = $controller->crear($DetalleFactura);
         <li><strong>referenciaFactura:</strong> <?php echo $DetalleFactura->get('refenciaFactura'); ?></li>
 </body>
 </html>
+
+
