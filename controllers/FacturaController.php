@@ -58,6 +58,15 @@ class FacturaController
         $row = $result->fetch_assoc();
         return $row['total'];
     }
+
+    public function actualizarEstadoFactura($refencia, $nuevoEstado)
+    {
+        $sql = "UPDATE facturas SET estado = '$nuevoEstado' WHERE refencia = '$refencia'";
+        $result = $this->dbController->execSql($sql);
+        $this->dbController->close();
+        return $result;
+    }
+
 }
 ?>
 

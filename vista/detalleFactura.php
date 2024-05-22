@@ -102,20 +102,22 @@ $total = $subtotal - $descuento;
     <?php endif; ?>
     <h3>Total: <?php echo $total; ?></h3>
 
+    <form action="actualizarEstadoFactura.php" method="post">
+        <h1 id="refenciaFactura">Referencia de la factura que cambia el Estato es: <?php echo $referencia ?></h1>
+        <input type="hidden" name="referencia" value="<?php echo $referencia  ?>">
+        <br>
+        <label for="nuevoEstado">Nuevo estado:</label>
+        <select id="nuevoEstado" name="nuevoEstado" required>
+            <option value="Pagada">Pagada</option>
+            <option value="Error">Error</option>
+            <option value="Cambio">Cambio</option>
+            <option value="Devolución">Devolución</option>
+        </select>
+        <br>
+        <input type="submit" value="Actualizar Estado">
+    </form>
+
     <br>
     <a href="pestañaFactura.php">Volver</a>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
