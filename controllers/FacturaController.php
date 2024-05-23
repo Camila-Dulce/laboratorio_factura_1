@@ -7,37 +7,7 @@ use App\controllers\DataBaseController;
 
 class FacturaController
 {
-    function CalculoFactura($factura)
-    {
-        // Calcular el descuento
-        $totalCompra = 0;
-        foreach ($factura->detalleFactura() as $detalle) {
-            $totalCompra += $detalle->cantidad * $detalle->precioUnitario;
-        }
-        $descuento = 0;
-        if ($totalCompra > 650000) {
-            $descuento = 8;
-        } elseif ($totalCompra > 200000) {
-            $descuento = 4;
-        } elseif ($totalCompra > 100000) {
-            $descuento = 2;
-        }
-
-        // Crear la factura
-        $factura->descuento = $descuento;
-        $factura->estado = 'Pagada'; // Estado por defecto
-        $result = $this->guardarFactura($factura);
-
-        if ($result) {
-            // Actualizar el estado de los artículos y guardar los detalles de la factura
-            foreach ($factura->detalleFactura() as $detalle) {
-                $detalle->precioUnitario = $detalle->articulo->precio;
-                $this->guardarDetalleFactura($detalle);
-            }
-        }
-        return $result;
-    }
-
+    
     function mostarFactura()
     {
         $dataBase = new DataBaseController();
@@ -88,6 +58,15 @@ class FacturaController
         $row = $result->fetch_assoc();
         return $row['total'];
     }
+
+    public function actualizarEstadoFactura($refencia, $nuevoEstado)
+    {
+        $sql = "UPDATE facturas SET estado = '$nuevoEstado' WHERE refencia = '$refencia'";
+        $result = $this->dbController->execSql($sql);
+        $this->dbController->close();
+        return $result;
+    }
+
 }
 ?>
 

@@ -41,7 +41,7 @@ $numFacturas = $facturaController->getCount() + 1;
             <input type="submit" value="Generar Factura">
         </form>
         <h1>Buscar Factura</h1>
-    <form action="detalleFactura.php" method="get">
+        <form action="detalleFactura.php" method="get">
         <label for="numeroDocumento">Número de Documento:</label>
         <input type="text" id="numeroDocumento" name="numeroDocumento" required>
         <br>
@@ -62,12 +62,16 @@ $numFacturas = $facturaController->getCount() + 1;
         </form>
     </div>
     <div class="div5">
+
         <form action="historialFacturas.php" method="POST">
             <input type="submit" value="Historial de Facturas">
         </form>
         </div>
     <div class="div6">
         <form action="logout.php" method="POST">
+
+        <form action="index.php" method="POST">
+
             <input type="submit" value="Cerrar Sesión">
         </form>
     </div>
