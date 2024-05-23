@@ -1,0 +1,57 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    margin: 50px auto; /* Márgenes centrados */
+}
+
+table {
+    width: calc(100% - 500px); /* Ancho de la tabla con margen */
+    margin: 10px auto; /* Centrar la tabla y agregar márgenes */
+    border-collapse: collapse; /* Colapsar los bordes de la tabla */
+}
+
+th, td {
+    padding: 8px;
+    border: 1px solid #ddd; /* Añadir bordes a las celdas */
+    text-align: left; /* Alinear el texto a la izquierda */
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+.volver-btn {
+    display: block;
+    width: 150px; /* Ancho fijo para el botón */
+    margin: 20px auto; /* Centrar el botón y agregar margen superior e inferior */
+    background-color: #4caf50; /* Fondo verde */
+    color: white; /* Letras blancas */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+}
+
+.volver-btn:hover {
+    background-color: #45a049;
+}
+
+a {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    text-decoration: none;
+    color: #4caf50;
+    font-weight: bold;
+}
+
+a:hover {
+    color: #45a049;
+}

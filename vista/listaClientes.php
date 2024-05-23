@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Clientes Registrados</title>
+    <link rel="stylesheet" type="text/css" href="listaCl.css">    
+    
 </head>
 <body>
     <h1>Lista de Clientes Registrados</h1>
@@ -60,7 +62,7 @@
         ?>
     </table>
     <br>
-    <a href="../vista/pestañaFactura.php">Volver</a>
+    <a class="volver-btn" href="../vista/pestañaFactura.php">Volver</a>
 </body>
 </html>
 

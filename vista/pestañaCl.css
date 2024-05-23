@@ -1,0 +1,69 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    margin: 50px auto; /* Márgenes centrados */
+}
+
+form {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center; /* Alinear el formulario al centro */
+}
+
+h2 {
+    margin-bottom: 20px; /* Espacio inferior para el título */
+    text-align: center;
+}
+
+label {
+    display: block; /* Para que los labels estén en una línea separada */
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+select {
+    width: calc(100% - 450px); /* Ajustar el ancho para que se ajuste al borde del formulario */
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+input[type="submit"] {
+    width: calc(100% - 980px); /* Ajustar el ancho del botón */
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+a {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    text-decoration: none;
+    color: #4caf50;
+    font-weight: bold;
+}
+
+a:hover {
+    color: #45a049;
+}

@@ -1,0 +1,77 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    margin: 50px auto; /* Márgenes centrados */
+}
+
+h1, h2 {
+    text-align: center; /* Centrar títulos */
+}
+
+form {
+    text-align: center; /* Centrar formulario */
+}
+
+table {
+    width: calc(100% - 40px); /* Ancho de la tabla con márgenes */
+    margin: 20px auto; /* Centrar la tabla y agregar márgenes */
+    border-collapse: collapse; /* Colapsar los bordes de la tabla */
+}
+
+th, td {
+    padding: 8px;
+    border: 1px solid #ddd; /* Añadir bordes a las celdas */
+    text-align: left; /* Alinear el texto a la izquierda */
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+input[type="submit"], select {
+    background-color: #ffffff; /* Fondo verde */
+    color: rgb(0, 0, 0); /* Letras blancas */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover, select:hover {
+    background-color: #45a049;
+}
+
+/* Estilo para los options */
+select option {
+    background-color: #f4f4f4;
+    color: #333;
+    padding: 10px;
+}
+
+select option:hover {
+    background-color: #ddd;
+    color: #000;
+}
+
+.volver-btn {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    background-color: #4caf50; /* Fondo verde */
+    color: white; /* Letras blancas */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    width: 150px; 
+}
+
+.volver-btn:hover {
+    background-color: #45a049;
+}

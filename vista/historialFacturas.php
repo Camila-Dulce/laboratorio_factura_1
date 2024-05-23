@@ -21,6 +21,8 @@ if ($estado) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Historial</title>
+    <link rel="stylesheet" type="text/css" href="historialFac.css">
+
 </head>
 <body>
 <h1>Historial de Facturas</h1>
@@ -64,7 +66,7 @@ if ($estado) {
 }
 ?>
 <br>
-    <a href="pestañaFactura.php">Volver</a>
+    <a class="volver-btn" href="pestañaFactura.php">Volver</a>
 </body>
 </html>
 

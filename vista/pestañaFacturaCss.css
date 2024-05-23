@@ -1,26 +1,114 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
 .parent {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: 0.5fr repeat(4, 1fr);
     grid-column-gap: 5px;
     grid-row-gap: 5px;
-    }
-    
-    .div1 { 
-        grid-area: 1 / 1 / 2 / 6; 
-    }
-    .div2 { 
-        grid-area: 2 / 1 / 6 / 5; 
-    }
-    .div3 { 
-        grid-area: 2 / 5 / 3 / 6; 
-    }
-    .div4 { 
-        grid-area: 3 / 5 / 4 / 6; 
-    }
-    .div5 { 
-        grid-area: 4 / 5 / 5 / 6; 
-    }
-    .div6 { 
-        grid-area: 5 / 5 / 6 / 6; 
-    }
+    margin: 20px;
+}
+
+.div1 { 
+    grid-area: 1 / 1 / 2 / 6; 
+}
+
+.div2 { 
+    grid-area: 2 / 1 / 6 / 5; 
+}
+
+.div3 { 
+    grid-area: 2 / 5 / 3 / 6; 
+}
+
+.div4 { 
+    grid-area: 3 / 5 / 4 / 6; 
+}
+
+.div5 { 
+    grid-area: 4 / 5 / 5 / 6; 
+}
+
+.div6 { 
+    grid-area: 5 / 5 / 6 / 6; 
+}
+
+.container {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+}
+
+form {
+    text-align: center;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="date"],
+select {
+    width: calc(100% - 250px); /* Ajusta el ancho de los inputs aquí */
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+input[type="submit"],
+button {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover,
+button:hover {
+    background-color: #45a049;
+}
+
+.fixed-buttons {
+    position: fixed;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+}
+
+.fixed-buttons:last-child {
+    top: auto;
+    bottom: 20px;
+}
+
+.fixed-buttons button {
+    display: block;
+    width: 150px;
+    margin-bottom: 10px;
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.fixed-buttons button:hover {
+    background-color: #45a049;
+}

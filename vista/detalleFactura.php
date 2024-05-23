@@ -52,57 +52,60 @@ $total = $subtotal - $descuento;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalle Factura</title>
+    <link rel="stylesheet" type="text/css" href="detalleFac.css">
 </head>
 <body>
     <h1>Factura</h1>
-    <div>
-        <h3>Cliente</h3>
-        <ul>
-            <li>Número de Documento: <?php echo $cliente['numeroDocumento']; ?></li>
-            <li>Nombre Completo: <?php echo $cliente['nombreCompleto']; ?></li>
-            <li>Tipo de Documento: <?php echo $cliente['tipoDocumento']; ?></li>
-            <li>Email: <?php echo $cliente['email']; ?></li>
-            <li>Teléfono: <?php echo $cliente['telefono']; ?></li>
-        </ul>
+    <div class="container">
+        <div class="flex-container">
+            <div>
+                <h3>Número de Factura: <?php echo $factura['refencia']; ?></h3>
+                <h3>Fecha: <?php echo $factura['fecha']; ?></h3>
+            </div>
+            <div>
+                <h3>Cliente</h3>
+                <ul>
+                    <li>Número de Documento: <?php echo $cliente['numeroDocumento']; ?></li>
+                    <li>Nombre Completo: <?php echo $cliente['nombreCompleto']; ?></li>
+                    <li>Tipo de Documento: <?php echo $cliente['tipoDocumento']; ?></li>
+                    <li>Email: <?php echo $cliente['email']; ?></li>
+                    <li>Teléfono: <?php echo $cliente['telefono']; ?></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <colgroup span="4" class="columns"></colgroup>
+                <tr>
+                    <th>Cantidad</th>
+                    <th>Descripción</th>
+                    <th>Precio unitario</th>
+                    <th>Valor</th>
+                </tr>
+                <?php
+                // Reiniciar el puntero del resultado de los detalles
+                $detalles->data_seek(0);
+                while ($detalle = $detalles->fetch_assoc()) {
+                    $valor = $detalle['cantidad'] * $detalle['precioUnitario'];
+                    echo "<tr>";
+                    echo "<td>{$detalle['cantidad']}</td>";
+                    echo "<td>{$detalle['idArticulo']}</td>";
+                    echo "<td>{$detalle['precioUnitario']}</td>";
+                    echo "<td>{$valor}</td>";
+                    echo "</tr>";
+                }
+                ?>
+            </table>
+        </div>
+
+        <h3>Subtotal: <?php echo $subtotal; ?></h3>
+        <?php if ($porcentajeDescuento > 0): ?>
+            <h3>Descuento (<?php echo $porcentajeDescuento; ?>%): <?php echo $descuento; ?></h3>
+        <?php endif; ?>
+        <h3>Total: <?php echo $total; ?></h3>
+
+        <a href="pestañaFactura.php" class="volver-btn">Volver</a>
     </div>
-
-    <div>
-        <ul>
-            <li>N° de Factura: <?php echo $factura['refencia']; ?></li>
-            <li>Fecha: <?php echo $factura['fecha']; ?></li>
-        </ul>
-    </div>
-
-    <table>
-        <colgroup span="4" class="columns"></colgroup>
-        <tr>
-            <th>Cantidad</th>
-            <th>Descripción</th>
-            <th>Precio unitario</th>
-            <th>Valor</th>
-        </tr>
-        <?php
-        // Reiniciar el puntero del resultado de los detalles
-        $detalles->data_seek(0);
-        while ($detalle = $detalles->fetch_assoc()) {
-            $valor = $detalle['cantidad'] * $detalle['precioUnitario'];
-            echo "<tr>";
-            echo "<td>{$detalle['cantidad']}</td>";
-            echo "<td>{$detalle['idArticulo']}</td>";
-            echo "<td>{$detalle['precioUnitario']}</td>";
-            echo "<td>{$valor}</td>";
-            echo "</tr>";
-        }
-        ?>
-    </table>
-
-    <h3>Subtotal: <?php echo $subtotal; ?></h3>
-    <?php if ($porcentajeDescuento > 0): ?>
-        <h3>Descuento (<?php echo $porcentajeDescuento; ?>%): <?php echo $descuento; ?></h3>
-    <?php endif; ?>
-    <h3>Total: <?php echo $total; ?></h3>
-
-    <br>
-    <a href="pestañaFactura.php">Volver</a>
 </body>
 </html>

@@ -71,7 +71,6 @@ $numFacturas = $facturaController->getCount() + 1;
     <input type="submit" value="Generar Factura">
 </form>
 
-
     <h1>Lista de Artículos</h1>
     <ul>
         <?php foreach ($articulos as $articulo): ?>
