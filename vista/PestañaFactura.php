@@ -62,6 +62,11 @@ $numFacturas = $facturaController->getCount() + 1;
         </form>
     </div>
     <div class="div5">
+        <form action="historialFacturas.php" method="POST">
+            <input type="submit" value="Historial de Facturas">
+        </form>
+        </div>
+    <div class="div6">
         <form action="logout.php" method="POST">
             <input type="submit" value="Cerrar Sesión">
         </form>

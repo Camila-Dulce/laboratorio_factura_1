@@ -31,5 +31,7 @@
         <br>
         <input type="submit" value="Validar Cliente">
     </form>
+    <br>
+    <a href="pestañaFactura.php">Volver</a>
 </body>
 </html>

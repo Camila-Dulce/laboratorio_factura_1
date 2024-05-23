@@ -45,6 +45,7 @@ if ($subtotal > 650000) {
 
 $descuento = ($subtotal * $porcentajeDescuento) / 100;
 $total = $subtotal - $descuento;
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -58,18 +59,18 @@ $total = $subtotal - $descuento;
     <div>
         <h3>Cliente</h3>
         <ul>
-            <li>Número de Documento: <?php echo $cliente['numeroDocumento']; ?></li>
-            <li>Nombre Completo: <?php echo $cliente['nombreCompleto']; ?></li>
-            <li>Tipo de Documento: <?php echo $cliente['tipoDocumento']; ?></li>
-            <li>Email: <?php echo $cliente['email']; ?></li>
-            <li>Teléfono: <?php echo $cliente['telefono']; ?></li>
+            <li>Número de Documento: <?php echo htmlspecialchars($cliente['numeroDocumento']); ?></li>
+            <li>Nombre Completo: <?php echo htmlspecialchars($cliente['nombreCompleto']); ?></li>
+            <li>Tipo de Documento: <?php echo htmlspecialchars($cliente['tipoDocumento']); ?></li>
+            <li>Email: <?php echo htmlspecialchars($cliente['email']); ?></li>
+            <li>Teléfono: <?php echo htmlspecialchars($cliente['telefono']); ?></li>
         </ul>
     </div>
 
     <div>
         <ul>
-            <li>N° de Factura: <?php echo $factura['refencia']; ?></li>
-            <li>Fecha: <?php echo $factura['fecha']; ?></li>
+            <li>N° de Factura: <?php echo htmlspecialchars($factura['refencia']); ?></li>
+            <li>Fecha: <?php echo htmlspecialchars($factura['fecha']); ?></li>
         </ul>
     </div>
 
@@ -87,25 +88,31 @@ $total = $subtotal - $descuento;
         while ($detalle = $detalles->fetch_assoc()) {
             $valor = $detalle['cantidad'] * $detalle['precioUnitario'];
             echo "<tr>";
-            echo "<td>{$detalle['cantidad']}</td>";
-            echo "<td>{$detalle['idArticulo']}</td>";
-            echo "<td>{$detalle['precioUnitario']}</td>";
-            echo "<td>{$valor}</td>";
+            echo "<td>" . htmlspecialchars($detalle['cantidad']) . "</td>";
+            echo "<td>" . htmlspecialchars($detalle['idArticulo']) . "</td>";
+            echo "<td>" . htmlspecialchars($detalle['precioUnitario']) . "</td>";
+            echo "<td>" . htmlspecialchars($valor) . "</td>";
             echo "</tr>";
         }
         ?>
     </table>
 
-    <h3>Subtotal: <?php echo $subtotal; ?></h3>
+    <h3>Subtotal: <?php echo htmlspecialchars($subtotal); ?></h3>
     <?php if ($porcentajeDescuento > 0): ?>
-        <h3>Descuento (<?php echo $porcentajeDescuento; ?>%): <?php echo $descuento; ?></h3>
+        <h3>Descuento (<?php echo htmlspecialchars($porcentajeDescuento); ?>%): <?php echo htmlspecialchars($descuento); ?></h3>
     <?php endif; ?>
-    <h3>Total: <?php echo $total; ?></h3>
+    <h3>Total: <?php echo htmlspecialchars($total); ?></h3>
 
     <br>
     <a href="pestañaFactura.php">Volver</a>
 </body>
 </html>
+
+
+
+
+
+
 
 
 

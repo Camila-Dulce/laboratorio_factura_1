@@ -26,7 +26,7 @@ if (is_array($clientes) && count($clientes) > 0) {
 }
 
 if ($idcliente === null) {
-    $mensaje = 'El cliente no está en la base de datos <a href="../vista/pestañaCliente.php">deseas reguistrar el cliente?</a>';
+    $mensaje = 'El cliente no está en la base de datos <a href="../vista/pestañaCliente.php">deseas registrar el cliente?</a>';
 } else {
     $controller = new FacturaController();
     $factura = new Factura();
