@@ -106,24 +106,3 @@ $total = $subtotal - $descuento;
     <a href="pestañaFactura.php">Volver</a>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-=======
->>>>>>> eb7fa525d541b5e354e2b9dc37a4d74ea93f3f0c
