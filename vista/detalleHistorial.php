@@ -20,7 +20,7 @@ $facturas = $facturaController->getFacturasByEstado($estado);
     <title>Detalle del Historial</title>
 </head>
 <body>
-<h1>Detalle del Historial de Facturas - Estado: <?php echo htmlspecialchars($estado); ?></h1>
+<h1>Detalle del Historial de Facturas - Estado: <?php echo $estado; ?></h1>
 <?php
 if (!empty($facturas)) {
     echo "<table border='1'>
@@ -33,11 +33,11 @@ if (!empty($facturas)) {
             </tr>";
     foreach ($facturas as $factura) {
         echo "<tr>
-                <td>" . htmlspecialchars($factura['referencia']) . "</td>
-                <td>" . htmlspecialchars($factura['fecha']) . "</td>
-                <td>" . htmlspecialchars($factura['idCliente']) . "</td>
-                <td>" . htmlspecialchars($factura['estado']) . "</td>
-                <td>" . htmlspecialchars($factura['descuento']) . "</td>
+                <td>" . $factura['referencia'] . "</td>
+                <td>" . $factura['fecha'] . "</td>
+                <td>" . $factura['idCliente'] . "</td>
+                <td>" . $factura['estado'] . "</td>
+                <td>" . $factura['descuento'] . "</td>
               </tr>";
     }
     echo "</table>";
@@ -47,5 +47,6 @@ if (!empty($facturas)) {
 ?>
 </body>
 </html>
+
 
 

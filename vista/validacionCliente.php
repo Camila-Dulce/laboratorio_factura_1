@@ -7,25 +7,14 @@
 </head>
 <body>
     <?php
-     include '../controllers/Database.php';
-     include '../controllers/Cliente.php';
+    require_once '../controllers/DataBaseController.php';
+    require_once '../controllers/ClienteController.php';
 
-     use App\controllers\ClienteController;
-    use App\controllers\DatabaseController;
+    use App\controllers\ClienteController;
+    use App\controllers\DataBaseController;
 
-
-    // Datos de conexión
-    $host = 'localhost';
-    $user = 'root';
-    $pwd = '';
-    $datab = 'facturacion_tienda_db';
-
-    // Crear instancia de la clase Database y conectarse a la base de datos
-    $db = new Database($host, $user, $pwd, $datab);
-    $db->connect();
-
-    // Crear instancia de la clase Cliente
-    $cliente = new cliente($db);
+    // Crear instancia de la clase ClienteController
+    $clienteController = new ClienteController();
 
     // Recuperar los datos del formulario
     $nombreCompleto = $_POST['nombreCompleto'];
@@ -35,19 +24,16 @@
     $telefono = $_POST['telefono'];
 
     // Verificar si el cliente ya está registrado
-    if ($cliente->verificarCliente($numeroDocumento)) {
-        echo 'El cliente ya está registrado en la base de datos. <a href="../vista/pestañaFactura.php">crear factur</a>';
+    if ($clienteController->verificarCliente($numeroDocumento)) {
+        echo 'El cliente ya está registrado en la base de datos. <a href="../vista/pestañaFactura.php">Crear factura</a>';
     } else {
         // Registrar al cliente
-        if ($cliente->registrarCliente($nombreCompleto, $tipoDocumento, $numeroDocumento, $email, $telefono)) {
+        if ($clienteController->registrarCliente($nombreCompleto, $tipoDocumento, $numeroDocumento, $email, $telefono)) {
             echo 'Cliente registrado exitosamente. <a href="../vista/pestañaFactura.php">Crear factura</a>';
         } else {
             echo 'Error al registrar el cliente. <a href="../vista/pestañaCliente.php">Volver a intentar</a>';
         }
     }
-
-    // Cerrar la conexión
-    $db->close();
     ?>
     <br>
 </body>

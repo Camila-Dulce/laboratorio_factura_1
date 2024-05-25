@@ -22,7 +22,6 @@ if ($estado) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Historial</title>
     <link rel="stylesheet" type="text/css" href="historialFac.css">
-
 </head>
 <body>
 <h1>Historial de Facturas</h1>
@@ -39,7 +38,7 @@ if ($estado) {
 
 <?php
 if ($estado) {
-    echo "<h2>Detalle del Historial de Facturas - Estado: " . htmlspecialchars($estado) . "</h2>";
+    echo "<h2>Detalle del Historial de Facturas - Estado: " . $estado . "</h2>";
 
     if (!empty($facturas)) {
         echo "<table border='1'>
@@ -52,11 +51,11 @@ if ($estado) {
                 </tr>";
         foreach ($facturas as $factura) {
             echo "<tr>
-                    <td>" . htmlspecialchars($factura['refencia']) . "</td>
-                    <td>" . htmlspecialchars($factura['fecha']) . "</td>
-                    <td>" . htmlspecialchars($factura['idCliente']) . "</td>
-                    <td>" . htmlspecialchars($factura['estado']) . "</td>
-                    <td>" . htmlspecialchars($factura['descuento']) . "</td>
+                    <td>" . $factura['refencia'] . "</td>
+                    <td>" . $factura['fecha'] . "</td>
+                    <td>" . $factura['idCliente'] . "</td>
+                    <td>" . $factura['estado'] . "</td>
+                    <td>" . $factura['descuento'] . "</td>
                   </tr>";
         }
         echo "</table>";
@@ -69,6 +68,7 @@ if ($estado) {
     <a class="volver-btn" href="pestañaFactura.php">Volver</a>
 </body>
 </html>
+
 
 
 

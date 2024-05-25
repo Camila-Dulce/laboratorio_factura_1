@@ -3,17 +3,18 @@ require_once '../controllers/DataBaseController.php';
 require_once '../controllers/GenerarFacturaController.php';
 
 use App\controllers\GenerarFacturaController;
+use App\controllers\DataBaseController;
 
 // Obtener los valores enviados desde el formulario
-$clienteId = isset($_GET['numeroDocumento']) ? intval($_GET['numeroDocumento']) : null;
+$numeroDocumento = isset($_GET['numeroDocumento']) ? $_GET['numeroDocumento'] : null;
 $referencia = isset($_GET['referencia']) ? $_GET['referencia'] : null;
 
-if ($clienteId === null || $referencia === null) {
-    die("Error: ID de cliente o referencia de factura no proporcionados.");
+if ($numeroDocumento === null || $referencia === null) {
+    die("Error: Número de documento o referencia de factura no proporcionados.");
 }
 
 $facturaController = new GenerarFacturaController();
-$facturaData = $facturaController->getFacturaData($clienteId, $referencia);
+$facturaData = $facturaController->getFacturaData($numeroDocumento, $referencia);
 
 if (!$facturaData || !$facturaData['factura']) {
     die("Error: No se encontraron datos de la factura.");
@@ -45,6 +46,34 @@ if ($subtotal > 650000) {
 
 $descuento = ($subtotal * $porcentajeDescuento) / 100;
 $total = $subtotal - $descuento;
+
+// Depuración: Verifica los valores antes de actualizar la base de datos
+echo "Descuento: $descuento\n";
+echo "Referencia: $referencia\n";
+echo "Cliente ID: " . $cliente['id'] . "\n";
+
+$conn = (new DataBaseController())->getConexion();
+$updateSql = "UPDATE facturas SET descuento = ? WHERE refencia = ? AND idCliente = ?";
+$stmtUpdate = $conn->prepare($updateSql);
+
+if (!$stmtUpdate) {
+    die("Preparación de la declaración fallida: " . $conn->error);
+}
+
+$stmtUpdate->bind_param("dsi", $descuento, $referencia, $cliente['id']);
+$stmtUpdate->execute();
+
+if ($stmtUpdate->errno) {
+    die("Error en la ejecución de la consulta: " . $stmtUpdate->error);
+}
+
+if ($stmtUpdate->affected_rows === 0) {
+    die("Error: No se pudo actualizar el descuento en la base de datos.");
+}
+
+$stmtUpdate->close();
+$conn->close();
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -109,3 +138,11 @@ $total = $subtotal - $descuento;
     </div>
 </body>
 </html>
+
+
+
+
+
+
+
+
