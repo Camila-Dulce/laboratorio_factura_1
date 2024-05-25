@@ -1,4 +1,5 @@
 <?php
+
 // Incluir archivos necesarios
 require_once '../controllers/dataBaseActualizacion.php';
 require_once '../controllers/clienteActualizacion.php';

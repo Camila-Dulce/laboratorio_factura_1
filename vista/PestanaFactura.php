@@ -14,7 +14,7 @@ $numFacturas = $facturaController->getCount() + 1;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Facturación</title>
-    <link rel="styleSheet" href="pestañaFacturaCss.css">
+    <link rel="styleSheet" href="pestanaFacturaCss.css">
 </head>
 <body>
 <div class="parent">
@@ -41,7 +41,7 @@ $numFacturas = $facturaController->getCount() + 1;
             <input type="submit" value="Generar Factura">
     </div>
     <div class="div3">
-        <form action="pestañaCliente.php" method="GET">
+        <form action="pestanaCliente.php" method="GET">
             <input type="submit" value="Crear Cliente">
         </form>
     </div>
@@ -51,14 +51,12 @@ $numFacturas = $facturaController->getCount() + 1;
         </form>
     </div>
     <div class="div5">
-
         <form action="historialFacturas.php" method="POST">
             <input type="submit" value="Historial de Facturas">
         </form>
         </div>
     <div class="div6">
         <form action="index.php" method="POST">
-
             <input type="submit" value="Cerrar Sesión">
         </form>
     </div>

@@ -62,7 +62,7 @@
         ?>
     </table>
     <br>
-    <a class="volver-btn" href="../vista/pestañaFactura.php">Volver</a>
+    <a class="volver-btn" href="../vista/pestanaFactura.php">Volver</a>
 </body>
 </html>
 

@@ -71,15 +71,30 @@ class ClienteController
         $dataBase->close();
         return $result;
     }
+    public function verificarSesion($usuario, $contrasena) {
+        $query = "SELECT * FROM clientes WHERE usuario = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("s", $usuario);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $cliente = $result->fetch_assoc();
+
+        if ($cliente && password_verify($contrasena, $cliente['contrasena'])) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function getClienteByUsuario($usuario) {
+        $query = "SELECT * FROM clientes WHERE usuario = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("s", $usuario);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc();
+    }
+
+
 }
-
-    function update()
-    {
-    }
-
-    function delete()
-    {
-    }
-
 ?>
-

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cliente</title>
-    <link rel="stylesheet" type="text/css" href="pestañaCl.css">
+    <link rel="stylesheet" type="text/css" href="pestanaCl.css">
 </head>
 <body>
 <form action="validacionCliente.php" method="post">     
@@ -33,6 +33,6 @@
         <input type="submit" value="Validar Cliente">
     </form>
     <br>
-    <a href="pestañaFactura.php">Volver</a>
+    <a href="pestanaFactura.php">Volver</a>
 </body>
 </html>

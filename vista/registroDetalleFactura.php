@@ -1,4 +1,5 @@
 <?php
+
 require_once '../models/Model.php';
 require_once '../models/DetalleFactura.php';
 require_once '../controllers/DetalleFacturaController.php';

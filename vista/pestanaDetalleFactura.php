@@ -1,4 +1,5 @@
 <?php
+
 require_once '../controllers/ArticuloController.php';
 require_once '../controllers/FacturaController.php';
 
@@ -46,6 +47,6 @@ $numFacturas = $facturaController->getCount() + 1;
         <input type="submit" value="Generar Factura">
     </form>
     <br>
-    <a href="pestañaFactura.php">Volver</a>
+    <a href="pestanaFactura.php">Volver</a>
 </body>
 </html>

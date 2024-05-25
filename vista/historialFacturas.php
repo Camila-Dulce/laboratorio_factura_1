@@ -37,7 +37,7 @@ if ($estado) {
 
 <?php
 if ($estado) {
-    echo "<h2>Detalle del Historial de Facturas - Estado: " . htmlspecialchars($estado) . "</h2>";
+    echo "<h2>Detalle del Historial de Facturas - Estado: " . $estado . "</h2>";
 
     if (!empty($facturas)) {
         echo "<table border='1'>
@@ -51,25 +51,25 @@ if ($estado) {
                 </tr>";
         foreach ($facturas as $factura) {
             echo "<tr>
-                    <td>" . htmlspecialchars($factura['refencia']) . "</td>
-                    <td>" . htmlspecialchars($factura['fecha']) . "</td>
-                    <td>" . htmlspecialchars($factura['idCliente']) . "</td>
-                    <td>" . htmlspecialchars($factura['estado']) . "</td>
-                    <td>" . htmlspecialchars($factura['descuento']) . "</td>
-                    <td><a href='detalleFactura.php?referencia=" . urlencode($factura['refencia']) . "&idCliente=" . urlencode($factura['idCliente']) . "'>Buscar</a></td>
-                  </tr>";
+                    <td>" . $factura['refencia'] . "</td>
+                    <td>" . $factura['fecha'] . "</td>
+                    <td>" . $factura['idCliente'] . "</td>
+                    <td>" . $factura['estado'] . "</td>
+                    <td>" . $factura['descuento'] . "</td>
+                    <td><a class='enlace' href='detalleFactura.php?referencia=" . urlencode($factura['refencia']) . "&idCliente=" . urlencode($factura['idCliente']) . "'>Buscar</a></td>
+                    </tr>";
         }
         echo "</table>";
     } else {
         echo "<p>No se encontraron facturas con el estado seleccionado.</p>";
     }
 }
-?>
-<br>
-<a class="volver-btn" href="pestañaFactura.php">Volver</a>
+
+    ?>
+    <a class="volver-btn" href="pestanaFactura.php">Volver</a>
+</div>
 </body>
 </html>
-
 
 
 

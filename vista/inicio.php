@@ -1,4 +1,5 @@
 <?php
+
 require_once '../controllers/ArticuloController.php';
 require_once '../controllers/FacturaController.php';
 
