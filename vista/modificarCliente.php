@@ -48,9 +48,13 @@ use App\controllers\Database;
                 <input type="text" name="nombreCompleto" value="<?php echo $cliente['nombreCompleto']; ?>" required>
                 <br>
 
-                <label for="tipoDocumento">Tipo Documento:</label>
-                <input type="text" name="tipoDocumento" value="<?php echo $cliente['tipoDocumento']; ?>" required>
-                <br>
+                <label for="tipoDocumento">Tipo de documento:</label><br>
+                    <select id="tipoDocumento" name="tipoDocumento" required>
+                        <option value="CC">Cédula de ciudadania</option>
+                        <option value="CE">Carnet de extranjería</option>
+                        <option value="NIT">NIT</option>
+                        <option value="TI">Tarjeta de identidad</option>
+                    </select><br>
 
                 <label for="numeroDocumento">Número Documento:</label>
                 <input type="text" name="numeroDocumento" value="<?php echo $cliente['numeroDocumento']; ?>" required>
