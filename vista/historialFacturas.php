@@ -1,7 +1,6 @@
 <?php
-
 require_once '../controllers/DataBaseController.php';
-require_once '../controllers/HistorialController.php';
+require_once '../controllers/GenerarFacturaController.php';
 
 use App\controllers\GenerarFacturaController;
 
@@ -28,17 +27,17 @@ if ($estado) {
 <form action="historialFacturas.php" method="GET">
     <label for="estado">Seleccione el estado de la factura a consultar: </label>
     <select name="estado" id="estado">
-        <option value="pagada" <?php if ($estado == 'pagada') echo 'selected'; ?>>Pagada</option>
-        <option value="cambio" <?php if ($estado == 'cambio') echo 'selected'; ?>>Cambio</option>
-        <option value="devolucion" <?php if ($estado == 'devolucion') echo 'selected'; ?>>Devolución</option>
-        <option value="error" <?php if ($estado == 'error') echo 'selected'; ?>>Error</option>
+        <option value="Pagada" <?php if ($estado == 'Pagada') echo 'selected'; ?>>Pagada</option>
+        <option value="Cambio" <?php if ($estado == 'Cambio') echo 'selected'; ?>>Cambio</option>
+        <option value="Devolución" <?php if ($estado == 'Devolución') echo 'selected'; ?>>Devolución</option>
+        <option value="Error" <?php if ($estado == 'Error') echo 'selected'; ?>>Error</option>
     </select>
     <input type="submit" value="Generar Historial" />
 </form>
 
 <?php
 if ($estado) {
-    echo "<h2>Detalle del Historial de Facturas - Estado: " . $estado . "</h2>";
+    echo "<h2>Detalle del Historial de Facturas - Estado: " . htmlspecialchars($estado) . "</h2>";
 
     if (!empty($facturas)) {
         echo "<table border='1'>
@@ -48,14 +47,16 @@ if ($estado) {
                     <th>ID Cliente</th>
                     <th>Estado</th>
                     <th>Descuento</th>
+                    <th>Acciones</th>
                 </tr>";
         foreach ($facturas as $factura) {
             echo "<tr>
-                    <td>" . $factura['refencia'] . "</td>
-                    <td>" . $factura['fecha'] . "</td>
-                    <td>" . $factura['idCliente'] . "</td>
-                    <td>" . $factura['estado'] . "</td>
-                    <td>" . $factura['descuento'] . "</td>
+                    <td>" . htmlspecialchars($factura['refencia']) . "</td>
+                    <td>" . htmlspecialchars($factura['fecha']) . "</td>
+                    <td>" . htmlspecialchars($factura['idCliente']) . "</td>
+                    <td>" . htmlspecialchars($factura['estado']) . "</td>
+                    <td>" . htmlspecialchars($factura['descuento']) . "</td>
+                    <td><a href='detalleFactura.php?referencia=" . urlencode($factura['refencia']) . "&idCliente=" . urlencode($factura['idCliente']) . "'>Buscar</a></td>
                   </tr>";
         }
         echo "</table>";
@@ -65,9 +66,14 @@ if ($estado) {
 }
 ?>
 <br>
-    <a class="volver-btn" href="pestañaFactura.php">Volver</a>
+<a class="volver-btn" href="pestañaFactura.php">Volver</a>
 </body>
 </html>
+
+
+
+
+
 
 
 

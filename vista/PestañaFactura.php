@@ -39,17 +39,6 @@ $numFacturas = $facturaController->getCount() + 1;
             </select>
             <br>
             <input type="submit" value="Generar Factura">
-        </form>
-        <h1>Buscar Factura</h1>
-        <form action="detalleFactura.php" method="get">
-        <label for="numeroDocumento">Número de Documento:</label>
-        <input type="text" id="numeroDocumento" name="numeroDocumento" required>
-        <br>
-        <label for="referencia">Referencia de la Factura:</label>
-        <input type="text" id="referencia" name="referencia" required>
-        <br>
-        <button type="submit">Buscar Factura</button>
-    </form>
     </div>
     <div class="div3">
         <form action="pestañaCliente.php" method="GET">

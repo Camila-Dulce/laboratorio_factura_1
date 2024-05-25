@@ -4,73 +4,83 @@ namespace App\controllers;
 
 use App\controllers\DataBaseController;
 
-class GenerarFacturaController
-{
-    private $dbController;
+class GenerarFacturaController {
 
-    public function __construct()
-    {
-        $this->dbController = new DataBaseController();
+    public function getFacturasByEstado($estado) {
+        $dbController = new DataBaseController();
+        $conn = $dbController->getConexion();
+
+        $sql = "SELECT * FROM facturas WHERE estado = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $estado);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $facturas = $result->fetch_all(MYSQLI_ASSOC);
+
+        $stmt->close();
+        $conn->close();
+
+        return $facturas;
     }
 
-    public function getFacturaData($numeroDocumento, $referencia)
-    {
-        $conn = $this->dbController->getConexion();
+    public function getFacturaData($idCliente, $referencia) {
+        $dbController = new DataBaseController();
+        $conn = $dbController->getConexion();
 
-        // Obtener los datos del cliente utilizando el número de documento
-        $clienteSql = "SELECT * FROM clientes WHERE numeroDocumento = ?";
-        $stmtCliente = $conn->prepare($clienteSql);
-        if (!$stmtCliente) {
-            die("Preparación de la declaración fallida: " . $conn->error);
-        }
-        $stmtCliente->bind_param("s", $numeroDocumento);
-        $stmtCliente->execute();
-        $clienteResult = $stmtCliente->get_result();
-        $cliente = $clienteResult->fetch_assoc();
+        $sql = "SELECT * FROM facturas WHERE refencia = ? AND idCliente = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("si", $referencia, $idCliente);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-        if (!$cliente) {
-            die("No se encontraron datos del cliente.");
+        if ($result->num_rows === 0) {
+            $stmt->close();
+            $conn->close();
+            return false;
         }
 
-        // Obtener los datos de la factura utilizando la referencia y el ID del cliente
-        $facturaSql = "SELECT * FROM facturas WHERE refencia = ? AND idCliente = ?";
-        $stmtFactura = $conn->prepare($facturaSql);
-        if (!$stmtFactura) {
-            die("Preparación de la declaración fallida: " . $conn->error);
-        }
-        $stmtFactura->bind_param("si", $referencia, $cliente['id']);
-        $stmtFactura->execute();
-        $facturaResult = $stmtFactura->get_result();
-        $factura = $facturaResult->fetch_assoc();
+        $factura = $result->fetch_assoc();
 
-        if (!$factura) {
-            die("No se encontraron datos de la factura.");
-        }
-
-        // Obtener los detalles de la factura utilizando la referencia de la factura
-        $detallesSql = "SELECT * FROM detallefacturas WHERE refenciaFactura = ?";
-        $stmtDetalles = $conn->prepare($detallesSql);
-        if (!$stmtDetalles) {
-            die("Preparación de la declaración fallida: " . $conn->error);
-        }
+        $sqlDetalles = "SELECT * FROM detallefacturas WHERE refenciaFactura = ?";
+        $stmtDetalles = $conn->prepare($sqlDetalles);
         $stmtDetalles->bind_param("s", $referencia);
         $stmtDetalles->execute();
-        $detallesResult = $stmtDetalles->get_result();
+        $detalles = $stmtDetalles->get_result();
 
-        // Cerrar declaraciones
-        $stmtCliente->close();
-        $stmtFactura->close();
+        $sqlCliente = "SELECT * FROM clientes WHERE id = ?";
+        $stmtCliente = $conn->prepare($sqlCliente);
+        $stmtCliente->bind_param("i", $idCliente);
+        $stmtCliente->execute();
+        $resultCliente = $stmtCliente->get_result();
+
+        if ($resultCliente->num_rows === 0) {
+            $stmt->close();
+            $stmtDetalles->close();
+            $stmtCliente->close();
+            $conn->close();
+            return false;
+        }
+
+        $cliente = $resultCliente->fetch_assoc();
+
+        $stmt->close();
         $stmtDetalles->close();
-        $this->dbController->close();
+        $stmtCliente->close();
+        $conn->close();
 
         return [
-            'cliente' => $cliente,
             'factura' => $factura,
-            'detalles' => $detallesResult
+            'detalles' => $detalles,
+            'cliente' => $cliente,
         ];
     }
 }
 ?>
+
+
+
+
+
 
 
 

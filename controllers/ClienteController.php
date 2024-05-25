@@ -44,6 +44,35 @@ class ClienteController
         return $result;
     }
 
+    function verificarCliente($numeroDocumento)
+    {
+        $dataBase = new DataBaseController();
+        $sql = "SELECT * FROM clientes WHERE numeroDocumento = '".$numeroDocumento."'";
+        $result = $dataBase->execSql($sql);
+        $clienteExistente = false;
+        if ($result !== false && $result->num_rows > 0) {
+            $clienteExistente = true;
+        }
+        $dataBase->close();
+        return $clienteExistente;
+    }
+
+    function registrarCliente($nombreCompleto, $tipoDocumento, $numeroDocumento, $email, $telefono)
+    {
+        $sql = "INSERT INTO clientes (nombreCompleto, tipoDocumento, numeroDocumento, email, telefono) VALUES (";
+        $sql .= "'".$nombreCompleto."',";
+        $sql .= "'".$tipoDocumento."',";
+        $sql .= "'".$numeroDocumento."',";
+        $sql .= "'".$email."',";
+        $sql .= "'".$telefono."'";
+        $sql .= ")";
+        $dataBase = new DataBaseController();
+        $result = $dataBase->execSql($sql);
+        $dataBase->close();
+        return $result;
+    }
+}
+
     function update()
     {
     }
@@ -51,5 +80,6 @@ class ClienteController
     function delete()
     {
     }
-}
+
 ?>
+
