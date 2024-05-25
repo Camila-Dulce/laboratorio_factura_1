@@ -1,0 +1,70 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+h1 {
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 10px;
+}
+
+ul {
+    text-align: center;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    margin-bottom: 5px;
+}
+
+a{
+    text-align: center;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    width: 400px;
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    background-color: #4caf50; /* Fondo verde */
+    color: white; /* Letras blancas */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+}
+a:hover{
+    background-color: #45a049;
+}
+
+form {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center; /* Alinear el formulario al centro */
+}
+
+input[type="submit"] {
+    width: calc(100% - 980px); /* Ajustar el ancho del botón */
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+}

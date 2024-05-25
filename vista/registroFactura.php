@@ -26,7 +26,7 @@ if (is_array($clientes) && count($clientes) > 0) {
 }
 
 if ($idcliente === null) {
-    $mensaje = 'El cliente no está en la base de datos <a href="../vista/pestañaCliente.php">deseas registrar el cliente?</a>';
+    $mensaje = 'El cliente no está en la base de datos <a href="../vista/pestañaCliente.php">¿Deseas registrar el cliente?</a>';
 } else {
     $controller = new FacturaController();
     $factura = new Factura();
@@ -39,9 +39,9 @@ if ($idcliente === null) {
     $result = $controller->guardarFactura($factura);
 
     if ($result) {
-        $mensaje = 'Datos guardados <a href="../vista/pestañaDetalleFactura.php">agregar los articulos de la factura </a>';
+        $mensaje = '<h2>Datos guardados</h2><a href="../vista/pestañaDetalleFactura.php">agregar los articulos de la factura </a>';
     } else {
-        $mensaje = 'No se pudo guardar el registro <a href="../vista/pestañaFactura.php">Volver a crear la factura</a>';
+        $mensaje = '<h2>No se pudo guardar el registro</h2> <a href="../vista/pestañaFactura.php">Volver a crear la factura</a>';
     }
 }
 ?>
@@ -51,6 +51,7 @@ if ($idcliente === null) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="styleSheet" href="comun.css">
     <title>Registrar Factura</title>
 </head>
 <body>
