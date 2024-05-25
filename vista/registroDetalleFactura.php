@@ -39,17 +39,19 @@ $result = $controller->crear($DetalleFactura);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="styleSheet" href="comun.css">
     <title>Registrar Fecha</title>
 </head>
 <body>
     <h1><?php echo $result ? 'Datos guardados' : 'No se pudo guardar el registro'; ?></h1>
     <br>
     <a href="../vista/pestañaDetalleFactura.php">Agregar mas produtos a la Factura</a>
-    <li><strong>cantidad:</strong> <?php echo $DetalleFactura->get('cantidad'); ?></li>
+    <ul>
+        <li><strong>cantidad:</strong> <?php echo $DetalleFactura->get('cantidad'); ?></li>
         <li><strong>Precio:</strong> <?php echo $DetalleFactura->get('precioUnitario'); ?></li>
         <li><strong>ID Aticulo:</strong> <?php echo $DetalleFactura->get('idArticulo'); ?></li>
         <li><strong>referenciaFactura:</strong> <?php echo $DetalleFactura->get('refenciaFactura'); ?></li>
-
+    </ul>
         <br>
     <a href="pestañaFactura.php">Volver</a>
 </body>

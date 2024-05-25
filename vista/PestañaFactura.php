@@ -25,7 +25,7 @@ $numFacturas = $facturaController->getCount() + 1;
             <h1 id="referencia">Referencia: <?php echo $numFacturas; ?></h1>
             <input type="hidden" name="referencia" value="<?php echo $numFacturas; ?>">
             <label for="fecha">Fecha:</label>
-            <input type="date" name="fecha" id="fecha" value="<?php echo date('Y-m-d'); ?>" required>
+            <input type="date" name="fecha" id="fecha" value="<?php echo date('Y-m-d-'); ?>" required>
             <br>
             <label for="numeroDocumento">Cliente:</label>
             <input type="text" name="numeroDocumento" id="numeroDocumento" required>
@@ -57,8 +57,6 @@ $numFacturas = $facturaController->getCount() + 1;
         </form>
         </div>
     <div class="div6">
-        <form action="logout.php" method="POST">
-
         <form action="index.php" method="POST">
 
             <input type="submit" value="Cerrar Sesión">
